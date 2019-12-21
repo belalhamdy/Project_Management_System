@@ -21,5 +21,10 @@ namespace Project_Planner
         {
             
         }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

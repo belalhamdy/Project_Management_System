@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Project_Planner
 {
-    enum Title { ProjectManger, TeamMember} //TODO Add diffrent Title 
+    enum Title { ProjectManger, TeamMember} //TODO Add different Titles
     class Employee //Employee Class
     {
+        public String Name { get; set; }
         public Title Title { get; set; }
         public int HoursDay { get; set; } //Hours per day
     }

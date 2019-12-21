@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_Management_System.GUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Project_Management_System
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new EmployeeForm());
+            Application.Run(new frmProject());
         }
     }
 }

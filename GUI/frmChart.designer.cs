@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "ChartForm";
-            this.Text = "ChartForm";
+            this.Text = "Project Management";
             this.Load += new System.EventHandler(this.ChartForm_Load);
             this.ResumeLayout(false);
 
