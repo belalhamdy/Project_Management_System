@@ -16,5 +16,10 @@ namespace Project_Management_System.GUI
         {
             InitializeComponent();
         }
+
+        private void frmProject_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

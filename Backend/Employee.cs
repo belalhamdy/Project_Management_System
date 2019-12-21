@@ -9,7 +9,7 @@ namespace Project_Planner
     enum Title { ProjectManger, TeamMember} //TODO Add diffrent Title 
     class Employee //Employee Class
     {
-        private String Title; //TODO: Edit it if you Added Enum
-        private int HoursDay; //Hours per day
+        public Title Title { get; set; }
+        public int HoursDay { get; set; } //Hours per day
     }
 }

@@ -47,45 +47,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\ChartForm.cs">
+    <Compile Include="Backend\TaskTimeException.cs" />
+    <Compile Include="GUI\frmChart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\ChartForm.designer.cs">
-      <DependentUpon>ChartForm.cs</DependentUpon>
+    <Compile Include="GUI\frmChart.designer.cs">
+      <DependentUpon>frmChart.cs</DependentUpon>
     </Compile>
-    <Compile Include="DBMS.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="GUI\EmployeeForm.cs">
+    <Compile Include="Backend\DBMS.cs" />
+    <Compile Include="Backend\Employee.cs" />
+    <Compile Include="GUI\frmEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\EmployeeForm.Designer.cs">
-      <DependentUpon>EmployeeForm.cs</DependentUpon>
+    <Compile Include="GUI\frmEmployee.Designer.cs">
+      <DependentUpon>frmEmployee.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ProjectForm.cs">
+    <Compile Include="GUI\frmProject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\ProjectForm.Designer.cs">
-      <DependentUpon>ProjectForm.cs</DependentUpon>
+    <Compile Include="GUI\frmProject.Designer.cs">
+      <DependentUpon>frmProject.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainTask.cs" />
-    <Compile Include="GUI\MainTaskForm.cs">
+    <Compile Include="GUI\frmMainTask.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\MainTaskForm.designer.cs">
-      <DependentUpon>MainTaskForm.cs</DependentUpon>
+    <Compile Include="GUI\frmMainTask.designer.cs">
+      <DependentUpon>frmMainTask.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Project.cs" />
+    <Compile Include="Backend\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report.cs" />
-    <Compile Include="SubTask.cs" />
-    <Compile Include="GUI\SubTaskForm.cs">
+    <Compile Include="Backend\Report.cs" />
+    <Compile Include="GUI\frmSubTask.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\SubTaskForm.designer.cs">
-      <DependentUpon>SubTaskForm.cs</DependentUpon>
+    <Compile Include="GUI\frmSubTask.designer.cs">
+      <DependentUpon>frmSubTask.cs</DependentUpon>
     </Compile>
-    <Compile Include="Task.cs" />
+    <Compile Include="Backend\Task.cs" />
+    <EmbeddedResource Include="GUI\frmChart.resx">
+      <DependentUpon>frmChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmEmployee.resx">
+      <DependentUpon>frmEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmMainTask.resx">
+      <DependentUpon>frmMainTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmProject.resx">
+      <DependentUpon>frmProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmSubTask.resx">
+      <DependentUpon>frmSubTask.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -94,6 +108,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

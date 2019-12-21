@@ -16,5 +16,10 @@ namespace Project_Management_System
         {
             InitializeComponent();
         }
+
+        private void EmployeeForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

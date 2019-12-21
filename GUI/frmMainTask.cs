@@ -16,5 +16,10 @@ namespace Project_Planner
         {
             InitializeComponent();
         }
+
+        private void MainTaskForm_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
