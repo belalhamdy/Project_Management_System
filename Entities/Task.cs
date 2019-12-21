@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_Planner
+namespace Project_Management_System.Entities
 {
-    class Task
+    public class Task
     {
+        public int ID { get; set; }
+        public int ProjectID { get; set; }
         private Task parentTask;
 
         public List<Task> DependantTasks { get; set; }
-        private List<Task> _SubTasks;
+        private List<Task> _SubTasks = new List<Task>();
         public List<Employee> AssignedEmployees { get; set; }
 
         public string Title { get; set; }

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Project_Planner
+namespace Project_Management_System.GUI
 {
-    public partial class ChartForm : Form
+    public partial class frmChart : Form
     {
-        public ChartForm()
+        public frmChart()
         {
             InitializeComponent();
         }

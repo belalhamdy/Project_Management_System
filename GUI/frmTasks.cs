@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_Management_System.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,23 +9,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Project_Planner
+namespace Project_Management_System.GUI
 {
-    public partial class MainTaskForm : Form
+    public partial class frmTasks : Form
     {
-        public MainTaskForm()
+        private Project OwnerProject;
+        public frmTasks(Project project)
         {
+            this.OwnerProject = project;
             InitializeComponent();
         }
 
         private void MainTaskForm_Load(object sender, EventArgs e)
         {
-            
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
+            throw new NotImplementedException();
         }
     }
 }

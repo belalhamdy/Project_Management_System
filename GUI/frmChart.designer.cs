@@ -1,6 +1,6 @@
-﻿namespace Project_Planner
+﻿namespace Project_Management_System.GUI
 {
-    partial class ChartForm
+    partial class frmChart
     {
         /// <summary>
         /// Required designer variable.

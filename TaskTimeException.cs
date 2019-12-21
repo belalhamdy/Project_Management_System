@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Project_Planner
+namespace Project_Management_System
 {
     [Serializable]
     internal class TaskException : Exception
