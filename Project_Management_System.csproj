@@ -60,6 +60,12 @@
     <Compile Include="GUI\EmployeeForm.Designer.cs">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ProjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ProjectForm.Designer.cs">
+      <DependentUpon>ProjectForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainTask.cs" />
     <Compile Include="GUI\MainTaskForm.cs">
       <SubType>Form</SubType>
