@@ -45,7 +45,7 @@
             this.EmployeeLView.HideSelection = false;
             this.EmployeeLView.Location = new System.Drawing.Point(13, 13);
             this.EmployeeLView.Name = "EmployeeLView";
-            this.EmployeeLView.Size = new System.Drawing.Size(775, 281);
+            this.EmployeeLView.Size = new System.Drawing.Size(581, 281);
             this.EmployeeLView.TabIndex = 0;
             this.EmployeeLView.UseCompatibleStateImageBehavior = false;
             // 
@@ -60,7 +60,7 @@
             this.groupBox1.Controls.Add(this.AddtBtn);
             this.groupBox1.Location = new System.Drawing.Point(13, 300);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(775, 138);
+            this.groupBox1.Size = new System.Drawing.Size(581, 138);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Employee Data";
@@ -69,7 +69,7 @@
             // 
             this.AddtBtn.Location = new System.Drawing.Point(6, 109);
             this.AddtBtn.Name = "AddtBtn";
-            this.AddtBtn.Size = new System.Drawing.Size(763, 23);
+            this.AddtBtn.Size = new System.Drawing.Size(569, 23);
             this.AddtBtn.TabIndex = 0;
             this.AddtBtn.Text = "Add";
             this.AddtBtn.UseVisualStyleBackColor = true;
@@ -86,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(357, 30);
+            this.label2.Location = new System.Drawing.Point(260, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 1;
@@ -105,28 +105,28 @@
             // 
             this.NameTxt.Location = new System.Drawing.Point(53, 27);
             this.NameTxt.Name = "NameTxt";
-            this.NameTxt.Size = new System.Drawing.Size(298, 20);
+            this.NameTxt.Size = new System.Drawing.Size(201, 20);
             this.NameTxt.TabIndex = 4;
             // 
             // WorkingHTxt
             // 
-            this.WorkingHTxt.Location = new System.Drawing.Point(471, 27);
+            this.WorkingHTxt.Location = new System.Drawing.Point(374, 27);
             this.WorkingHTxt.Name = "WorkingHTxt";
-            this.WorkingHTxt.Size = new System.Drawing.Size(298, 20);
+            this.WorkingHTxt.Size = new System.Drawing.Size(201, 20);
             this.WorkingHTxt.TabIndex = 5;
             // 
             // TitleTxt
             // 
             this.TitleTxt.Location = new System.Drawing.Point(85, 67);
             this.TitleTxt.Name = "TitleTxt";
-            this.TitleTxt.Size = new System.Drawing.Size(684, 20);
+            this.TitleTxt.Size = new System.Drawing.Size(490, 20);
             this.TitleTxt.TabIndex = 6;
             // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(606, 451);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.EmployeeLView);
             this.Name = "EmployeeForm";

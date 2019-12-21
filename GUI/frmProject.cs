@@ -26,5 +26,10 @@ namespace Project_Management_System.GUI
         {
             
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

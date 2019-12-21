@@ -28,8 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.TaskGroup = new System.Windows.Forms.GroupBox();
+            this.AddSubtaskBtn = new System.Windows.Forms.Button();
+            this.WorkHoursUD = new System.Windows.Forms.NumericUpDown();
+            this.ActualWorkUD = new System.Windows.Forms.NumericUpDown();
+            this.DuoDatePkr = new System.Windows.Forms.DateTimePicker();
+            this.StartDatePkr = new System.Windows.Forms.DateTimePicker();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.SelectedEmLView = new System.Windows.Forms.ListView();
+            this.label7 = new System.Windows.Forms.Label();
+            this.SelectEmLView = new System.Windows.Forms.ListView();
             this.TitleTxt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.DependantLView = new System.Windows.Forms.ListView();
@@ -39,32 +51,24 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.addBtn = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.SelectEmLView = new System.Windows.Forms.ListView();
-            this.label8 = new System.Windows.Forms.Label();
-            this.SelectedEmLView = new System.Windows.Forms.ListView();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.StartDatePkr = new System.Windows.Forms.DateTimePicker();
-            this.DuoDatePkr = new System.Windows.Forms.DateTimePicker();
-            this.ActualWorkUD = new System.Windows.Forms.NumericUpDown();
-            this.WorkHoursUD = new System.Windows.Forms.NumericUpDown();
-            this.AddSubtaskBtn = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.groupBox1.SuspendLayout();
             this.TaskGroup.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ActualWorkUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkHoursUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActualWorkUD)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listView1
+            // groupBox1
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(13, 13);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(775, 261);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.groupBox1.Controls.Add(this.TaskGroup);
+            this.groupBox1.Controls.Add(this.listView1);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(787, 597);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tasks";
             // 
             // TaskGroup
             // 
@@ -83,12 +87,118 @@
             this.TaskGroup.Controls.Add(this.label2);
             this.TaskGroup.Controls.Add(this.label1);
             this.TaskGroup.Controls.Add(this.addBtn);
-            this.TaskGroup.Location = new System.Drawing.Point(13, 281);
+            this.TaskGroup.Location = new System.Drawing.Point(6, 287);
             this.TaskGroup.Name = "TaskGroup";
             this.TaskGroup.Size = new System.Drawing.Size(775, 299);
-            this.TaskGroup.TabIndex = 1;
+            this.TaskGroup.TabIndex = 4;
             this.TaskGroup.TabStop = false;
             this.TaskGroup.Text = "Task";
+            // 
+            // AddSubtaskBtn
+            // 
+            this.AddSubtaskBtn.Location = new System.Drawing.Point(9, 268);
+            this.AddSubtaskBtn.Name = "AddSubtaskBtn";
+            this.AddSubtaskBtn.Size = new System.Drawing.Size(395, 23);
+            this.AddSubtaskBtn.TabIndex = 18;
+            this.AddSubtaskBtn.Text = "Add SubTask";
+            this.AddSubtaskBtn.UseVisualStyleBackColor = true;
+            // 
+            // WorkHoursUD
+            // 
+            this.WorkHoursUD.Location = new System.Drawing.Point(318, 66);
+            this.WorkHoursUD.Name = "WorkHoursUD";
+            this.WorkHoursUD.Size = new System.Drawing.Size(104, 20);
+            this.WorkHoursUD.TabIndex = 17;
+            // 
+            // ActualWorkUD
+            // 
+            this.ActualWorkUD.Location = new System.Drawing.Point(318, 102);
+            this.ActualWorkUD.Name = "ActualWorkUD";
+            this.ActualWorkUD.Size = new System.Drawing.Size(104, 20);
+            this.ActualWorkUD.TabIndex = 16;
+            // 
+            // DuoDatePkr
+            // 
+            this.DuoDatePkr.Location = new System.Drawing.Point(81, 98);
+            this.DuoDatePkr.Name = "DuoDatePkr";
+            this.DuoDatePkr.Size = new System.Drawing.Size(104, 20);
+            this.DuoDatePkr.TabIndex = 15;
+            // 
+            // StartDatePkr
+            // 
+            this.StartDatePkr.Location = new System.Drawing.Point(81, 62);
+            this.StartDatePkr.Name = "StartDatePkr";
+            this.StartDatePkr.Size = new System.Drawing.Size(104, 20);
+            this.StartDatePkr.TabIndex = 14;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.SelectedEmLView);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.SelectEmLView);
+            this.groupBox2.Location = new System.Drawing.Point(9, 128);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(760, 134);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Employees";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(404, 81);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(13, 13);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "<";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(404, 68);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(13, 13);
+            this.label9.TabIndex = 14;
+            this.label9.Text = ">";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(420, 22);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(103, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Selected Employees";
+            // 
+            // SelectedEmLView
+            // 
+            this.SelectedEmLView.HideSelection = false;
+            this.SelectedEmLView.Location = new System.Drawing.Point(423, 38);
+            this.SelectedEmLView.Name = "SelectedEmLView";
+            this.SelectedEmLView.Size = new System.Drawing.Size(331, 90);
+            this.SelectedEmLView.TabIndex = 16;
+            this.SelectedEmLView.UseCompatibleStateImageBehavior = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(91, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Select Employees";
+            // 
+            // SelectEmLView
+            // 
+            this.SelectEmLView.HideSelection = false;
+            this.SelectEmLView.Location = new System.Drawing.Point(6, 38);
+            this.SelectEmLView.Name = "SelectEmLView";
+            this.SelectEmLView.Size = new System.Drawing.Size(392, 90);
+            this.SelectEmLView.TabIndex = 14;
+            this.SelectEmLView.UseCompatibleStateImageBehavior = false;
             // 
             // TitleTxt
             // 
@@ -105,7 +215,6 @@
             this.label6.Size = new System.Drawing.Size(98, 13);
             this.label6.TabIndex = 7;
             this.label6.Text = "Dependant Tasks :";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // DependantLView
             // 
@@ -170,145 +279,44 @@
             this.addBtn.Text = "Add Task";
             this.addBtn.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // listView1
             // 
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.SelectedEmLView);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.SelectEmLView);
-            this.groupBox2.Location = new System.Drawing.Point(9, 128);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(760, 134);
-            this.groupBox2.TabIndex = 13;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Employees";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 22);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(91, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Select Employees";
-            // 
-            // SelectEmLView
-            // 
-            this.SelectEmLView.HideSelection = false;
-            this.SelectEmLView.Location = new System.Drawing.Point(6, 38);
-            this.SelectEmLView.Name = "SelectEmLView";
-            this.SelectEmLView.Size = new System.Drawing.Size(392, 90);
-            this.SelectEmLView.TabIndex = 14;
-            this.SelectEmLView.UseCompatibleStateImageBehavior = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(420, 22);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(103, 13);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Selected Employees";
-            // 
-            // SelectedEmLView
-            // 
-            this.SelectedEmLView.HideSelection = false;
-            this.SelectedEmLView.Location = new System.Drawing.Point(423, 38);
-            this.SelectedEmLView.Name = "SelectedEmLView";
-            this.SelectedEmLView.Size = new System.Drawing.Size(331, 90);
-            this.SelectedEmLView.TabIndex = 16;
-            this.SelectedEmLView.UseCompatibleStateImageBehavior = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(404, 68);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(13, 13);
-            this.label9.TabIndex = 14;
-            this.label9.Text = ">";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(404, 81);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(13, 13);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "<";
-            // 
-            // StartDatePkr
-            // 
-            this.StartDatePkr.Location = new System.Drawing.Point(81, 62);
-            this.StartDatePkr.Name = "StartDatePkr";
-            this.StartDatePkr.Size = new System.Drawing.Size(104, 20);
-            this.StartDatePkr.TabIndex = 14;
-            // 
-            // DuoDatePkr
-            // 
-            this.DuoDatePkr.Location = new System.Drawing.Point(81, 98);
-            this.DuoDatePkr.Name = "DuoDatePkr";
-            this.DuoDatePkr.Size = new System.Drawing.Size(104, 20);
-            this.DuoDatePkr.TabIndex = 15;
-            // 
-            // ActualWorkUD
-            // 
-            this.ActualWorkUD.Location = new System.Drawing.Point(318, 102);
-            this.ActualWorkUD.Name = "ActualWorkUD";
-            this.ActualWorkUD.Size = new System.Drawing.Size(104, 20);
-            this.ActualWorkUD.TabIndex = 16;
-            // 
-            // WorkHoursUD
-            // 
-            this.WorkHoursUD.Location = new System.Drawing.Point(318, 66);
-            this.WorkHoursUD.Name = "WorkHoursUD";
-            this.WorkHoursUD.Size = new System.Drawing.Size(104, 20);
-            this.WorkHoursUD.TabIndex = 17;
-            // 
-            // AddSubtaskBtn
-            // 
-            this.AddSubtaskBtn.Location = new System.Drawing.Point(9, 268);
-            this.AddSubtaskBtn.Name = "AddSubtaskBtn";
-            this.AddSubtaskBtn.Size = new System.Drawing.Size(395, 23);
-            this.AddSubtaskBtn.TabIndex = 18;
-            this.AddSubtaskBtn.Text = "Add SubTask";
-            this.AddSubtaskBtn.UseVisualStyleBackColor = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(6, 19);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(775, 261);
+            this.listView1.TabIndex = 3;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // MainTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 585);
-            this.Controls.Add(this.TaskGroup);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(808, 619);
+            this.Controls.Add(this.groupBox1);
             this.Name = "MainTaskForm";
             this.Text = "Project Management";
             this.Load += new System.EventHandler(this.MainTaskForm_Load);
+            this.groupBox1.ResumeLayout(false);
             this.TaskGroup.ResumeLayout(false);
             this.TaskGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WorkHoursUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActualWorkUD)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ActualWorkUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WorkHoursUD)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox TaskGroup;
-        private System.Windows.Forms.Button addBtn;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ListView DependantLView;
-        private System.Windows.Forms.TextBox TitleTxt;
+        private System.Windows.Forms.Button AddSubtaskBtn;
+        private System.Windows.Forms.NumericUpDown WorkHoursUD;
+        private System.Windows.Forms.NumericUpDown ActualWorkUD;
+        private System.Windows.Forms.DateTimePicker DuoDatePkr;
+        private System.Windows.Forms.DateTimePicker StartDatePkr;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -316,10 +324,15 @@
         private System.Windows.Forms.ListView SelectedEmLView;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListView SelectEmLView;
-        private System.Windows.Forms.NumericUpDown WorkHoursUD;
-        private System.Windows.Forms.NumericUpDown ActualWorkUD;
-        private System.Windows.Forms.DateTimePicker DuoDatePkr;
-        private System.Windows.Forms.DateTimePicker StartDatePkr;
-        private System.Windows.Forms.Button AddSubtaskBtn;
+        private System.Windows.Forms.TextBox TitleTxt;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListView DependantLView;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.ListView listView1;
     }
 }
