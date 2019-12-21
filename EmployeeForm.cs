@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Project_Management_System
 {
-    public partial class Form1 : Form
+    public partial class EmployeeForm : Form
     {
-        public Form1()
+        public EmployeeForm()
         {
             InitializeComponent();
         }
