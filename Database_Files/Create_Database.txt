@@ -1,0 +1,104 @@
+CREATE DATABASE ProjectManager_DB
+
+CREATE TABLE [task_Type] (
+  [id] integer PRIMARY KEY,
+  [type] varchar(10)
+)
+GO
+
+CREATE TABLE [day_Type] (
+  [id] integer PRIMARY KEY,
+  [type] varchar(10)
+)
+GO
+
+CREATE TABLE [project_Manager] (
+  [username] varchar(30) PRIMARY KEY,
+  [firstName] nvarchar(255) NOT NULL,
+  [lastName] nvarchar(255) NOT NULL,
+  [password] varchar(256) NOT NULL
+)
+GO
+
+CREATE TABLE [project_Plan] (
+  [weekStartDay] int NOT NULL,
+  [adminId] varchar(30) NOT NULL,
+  [projectId] int PRIMARY KEY IDENTITY(1, 1),
+  [workingHours] int,
+  [projectName] nvarchar(255) NOT NULL,
+  [startDate] datetime DEFAULT (GETDATE()),
+  [dueDate] datetime DEFAULT (GETDATE())
+)
+GO
+
+CREATE TABLE [deliverable] (
+  [projectId] int NOT NULL,
+  [deliverableId] int PRIMARY KEY IDENTITY(1, 1),
+  [isFinished] BIT DEFAULT 0,
+  [title] varchar(30) NOT NULL,
+  [description] nvarchar(255)
+)
+GO
+
+CREATE TABLE [team_Member] (
+  [taskId] int NOT NULL,
+  [memberId] int PRIMARY KEY IDENTITY(1, 1),
+  [firstName] nvarchar(255) NOT NULL,
+  [lastName] nvarchar(255) NOT NULL,
+  [title] varchar(30) NOT NULL,
+  [workingHours] int NOT NULL,
+  [cost] int NOT NULL
+)
+GO
+
+CREATE TABLE [task] (
+  [parentTask] int,
+  [taskType] int NOT NULL,
+  [projectId] int NOT NULL,
+  [taskId] int PRIMARY KEY IDENTITY(1, 1),
+  [startDate] datetime DEFAULT (GETDATE()),
+  [dueDate] datetime DEFAULT (GETDATE()),
+  [title] varchar(30) NOT NULL,
+  [actualWorkingDays] int NOT NULL,
+  [isFinished] BIT DEFAULT 0
+)
+GO
+
+ALTER TABLE [project_Plan] ADD FOREIGN KEY ([adminId]) REFERENCES [project_Manager] ([username])
+GO
+
+ALTER TABLE [deliverable] ADD FOREIGN KEY ([projectId]) REFERENCES [project_Plan] ([projectId])
+GO
+
+ALTER TABLE [task] ADD FOREIGN KEY ([projectId]) REFERENCES [project_Plan] ([projectId])
+GO
+
+ALTER TABLE [team_Member] ADD FOREIGN KEY ([taskId]) REFERENCES [task] ([taskId])
+GO
+
+ALTER TABLE [task] ADD FOREIGN KEY ([taskType]) REFERENCES [task_Type] ([id])
+GO
+
+ALTER TABLE [project_Plan] ADD FOREIGN KEY ([weekStartDay]) REFERENCES [day_Type] ([id])
+GO
+
+ALTER TABLE [task] ADD FOREIGN KEY ([parentTask]) REFERENCES [task] ([taskId])
+GO
+
+
+insert into [day_Type] (id, type)
+values
+  (1, 'Saturday'),
+  (2, 'Sunday'),
+  (3, 'Monday'),
+  (4, 'Tuesday'),
+  (5, 'Wednesday'),
+  (6, 'Thursday'),
+  (7, 'Friday');
+  
+  
+insert into [task_Type] (id, type)
+values
+  (1, 'Task'),
+  (2, 'Sub Task'),
+  (3, 'Milestone');
