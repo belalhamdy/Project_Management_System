@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Project_Management_System.GUI
 {
-    public partial class ProjectForm : Form
+    public partial class frmProject : Form
     {
-        public ProjectForm()
+        public frmProject()
         {
             InitializeComponent();
         }

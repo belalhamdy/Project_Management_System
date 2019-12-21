@@ -8,7 +8,7 @@ namespace Project_Planner
 {
     class Task //Abstract Task Class
     {
-        private String Title;
+        private string Title;
         private DateTime StartingDate;
         private DateTime DueDate;
         private int WorkingHours;

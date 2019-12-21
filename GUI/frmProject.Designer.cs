@@ -1,6 +1,6 @@
 ﻿namespace Project_Management_System.GUI
 {
-    partial class ProjectForm
+    partial class frmProject
     {
         /// <summary>
         /// Required designer variable.
