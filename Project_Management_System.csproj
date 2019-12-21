@@ -46,25 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChartForm.cs">
+    <Compile Include="GUI\ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChartForm.designer.cs">
+    <Compile Include="GUI\ChartForm.designer.cs">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DBMS.cs" />
     <Compile Include="Employee.cs" />
-    <Compile Include="EmployeeForm.cs">
+    <Compile Include="GUI\EmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EmployeeForm.Designer.cs">
+    <Compile Include="GUI\EmployeeForm.Designer.cs">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainTask.cs" />
-    <Compile Include="MainTaskForm.cs">
+    <Compile Include="GUI\MainTaskForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainTaskForm.designer.cs">
+    <Compile Include="GUI\MainTaskForm.designer.cs">
       <DependentUpon>MainTaskForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -72,10 +72,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report.cs" />
     <Compile Include="SubTask.cs" />
-    <Compile Include="SubTaskForm.cs">
+    <Compile Include="GUI\SubTaskForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubTaskForm.designer.cs">
+    <Compile Include="GUI\SubTaskForm.designer.cs">
       <DependentUpon>SubTaskForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Task.cs" />
