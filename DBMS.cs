@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
+using System.Globalization;
+using System.Linq;
 
 namespace Project_Management_System
 {
@@ -45,7 +46,7 @@ namespace Project_Management_System
         }
 
 
-        public void AddEmployee(Employee employee)
+        public int AddEmployee(Employee employee)
         {
             OpenConnection();
 
@@ -53,7 +54,7 @@ namespace Project_Management_System
 
             var command = new SqlCommand(queryString, co);
 
-            command.Parameters.AddWithValue("@taskId", employee.TaskId);
+            command.Parameters.AddWithValue("@taskId", employee.TaskId ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@name", employee.Name);
             command.Parameters.AddWithValue("@title", employee.Title);
             command.Parameters.AddWithValue("@workingHours", employee.HoursDay);
@@ -62,13 +63,15 @@ namespace Project_Management_System
 
 
 
-            var rowsAdded = command.ExecuteNonQuery();
+            int? newId = (int)command.ExecuteScalar();
 
-            if (rowsAdded < 1) throw new Exception("Error in inserting employee in database please try again later.");
+            if (newId == null) throw new Exception("Error in inserting employee in database please try again later.");
 
             CloseConnection();
+
+            return (int) newId;
         }
-        public void AddProject(Project project)
+        public int AddProject(Project project)
         {
             OpenConnection();
 
@@ -85,13 +88,15 @@ namespace Project_Management_System
 
 
 
-            var rowsAdded = command.ExecuteNonQuery();
+            int? newId = (int)command.ExecuteScalar();
 
-            if (rowsAdded < 1) throw new Exception("Error in inserting project in database please try again later.");
+            if (newId == null) throw new Exception("Error in inserting project in database please try again later.");
 
             CloseConnection();
+            
+            return (int) newId;
         }
-        public void AddTask(Task task)
+        public int AddTask(Task task)
         {
             OpenConnection();
 
@@ -99,25 +104,27 @@ namespace Project_Management_System
 
             var command = new SqlCommand(queryString, co);
 
-            command.Parameters.AddWithValue("@ParentTask", task.ParentTask);
+            command.Parameters.AddWithValue("@ParentTask", task.ParentTask ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@taskType", task.TaskType);
             command.Parameters.AddWithValue("@projectId", task.ProjectID);
             command.Parameters.AddWithValue("@startDate", task.StartingDate);
             command.Parameters.AddWithValue("@dueDate", task.DueDate);
             command.Parameters.AddWithValue("@title", task.Title);
-            command.Parameters.AddWithValue("@actualWorkingHours", task.ActualWorkingHours);
+            command.Parameters.AddWithValue("@actualWorkingHours", task.ActualWorkingHours ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@isFinished", task.IsFinished);
 
 
 
-            var rowsAdded = command.ExecuteNonQuery();
+            int? newId= (int) command.ExecuteScalar();
 
-            if (rowsAdded < 1) throw new Exception("Error in inserting task in database please try again later.");
+            if (newId == null) throw new Exception("Error in inserting task in database please try again later.");
 
             CloseConnection();
+
+            return (int) newId;
         }
 
-        public void AddDeliverable(Deliverable deliverable)
+        public int AddDeliverable(Deliverable deliverable)
         {
             OpenConnection();
 
@@ -127,16 +134,18 @@ namespace Project_Management_System
 
             command.Parameters.AddWithValue("@projectId", deliverable.ProjectID);
             command.Parameters.AddWithValue("@title", deliverable.Title);
-            command.Parameters.AddWithValue("@description", deliverable.Description);
+            command.Parameters.AddWithValue("@description", deliverable.Description ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@isFinished", deliverable.IsFinished);
 
 
 
-            var rowsAdded = command.ExecuteNonQuery();
+            int? newId = (int)command.ExecuteScalar();
 
-            if (rowsAdded < 1) throw new Exception("Error in inserting deliverable in database please try again later.");
+            if (newId == null) throw new Exception("Error in inserting deliverable in database please try again later.");
 
             CloseConnection();
+
+            return (int) newId;
         }
 
 
@@ -336,5 +345,59 @@ namespace Project_Management_System
             return ret;
         }
 
+        public void UnselectAllEmployeesFromTask(int taskID)
+        {
+            OpenConnection();
+
+            var queryString = "UPDATE employee SET taskId = null where memberId = @Id";
+
+            var command = new SqlCommand(queryString, co);
+
+            command.Parameters.AddWithValue("@Id", taskID);
+
+
+            var rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected < 1) throw new Exception("Error in updating employees from database please try again later.");
+
+            CloseConnection();
+        }
+
+        //TODO: TEST IT
+        public void SetEmployeesOnTask(int taskID, List<int> employeesID)
+        {
+            OpenConnection();
+
+            var queryString = "";
+
+            var command = new SqlCommand(queryString, co);
+            command.CommandText = $"UPDATE employee SET taskId = @Id where memberId in ({AddArrayParameters(command, employeesID, "employeeID")})";
+
+            command.Parameters.AddWithValue("@Id", taskID);
+
+
+            var rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected < 1) throw new Exception("Error in updating employees from database please try again later.");
+
+            CloseConnection();
+        }
+        protected string AddArrayParameters(SqlCommand sqlCommand,List<int> array, string paramName)
+        {
+            /* An array cannot be simply added as a parameter to a SqlCommand so we need to loop through things and add it manually. 
+             * Each item in the array will end up being it's own SqlParameter so the return value for this must be used as part of the
+             * IN statement in the CommandText.
+             */
+            var parameters = new string[array.Count];
+            for (int i = 0; i < array.Count; i++)
+            {
+                parameters[i] = string.Format("@{0}{1}", paramName, i);
+                sqlCommand.Parameters.AddWithValue(parameters[i], array[i]);
+            }
+
+            return string.Join(", ", parameters);
+        }
+
     }
+
 }
