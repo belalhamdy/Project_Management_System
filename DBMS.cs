@@ -78,15 +78,15 @@ namespace Project_Management_System
             command.Parameters.AddWithValue("@projectName", project.ProjectName);
             command.Parameters.AddWithValue("@startDate", project.StartingDate);
             command.Parameters.AddWithValue("@dueDate", project.DueDate);
-            
+
 
             int? newId = (int?)command.ExecuteScalar();
 
             if (newId == null) throw new Exception("Error in inserting project in database please try again later.");
 
             CloseConnection();
-            
-            return (int) newId;
+
+            return (int)newId;
         }
         public int AddTask(Task task)
         {
@@ -105,13 +105,13 @@ namespace Project_Management_System
             command.Parameters.AddWithValue("@actualWorkingHours", task.ActualWorkingHours ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@isFinished", task.IsFinished);
 
-            int? newId= (int?) command.ExecuteScalar();
+            int? newId = (int?)command.ExecuteScalar();
 
             if (newId == null) throw new Exception("Error in inserting task in database please try again later.");
 
             CloseConnection();
 
-            return (int) newId;
+            return (int)newId;
         }
 
         public int AddDeliverable(Deliverable deliverable)
@@ -126,14 +126,14 @@ namespace Project_Management_System
             command.Parameters.AddWithValue("@title", deliverable.Title);
             command.Parameters.AddWithValue("@description", deliverable.Description ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@isFinished", deliverable.IsFinished);
-            
+
             int? newId = (int?)command.ExecuteScalar();
 
             if (newId == null) throw new Exception("Error in inserting deliverable in database please try again later.");
 
             CloseConnection();
 
-            return (int) newId;
+            return (int)newId;
         }
 
 
@@ -320,7 +320,17 @@ namespace Project_Management_System
             {
                 while (reader.Read())
                 {
-                    ret.Add(new Task(reader["taskId"] == System.DBNull.Value ? null : (int?)reader["taskId"], (int)reader["ParentTask"], (int)reader["taskType"], (DateTime)reader["startDate"], (DateTime)reader["dueDate"], (string)reader["title"], reader["actualWorkingHours"] == System.DBNull.Value ? null : (int?)reader["actualWorkingHours"], (bool)reader["isFinished"]));
+                    
+                    var id = (int)reader["taskId"];
+                    var parentTask = (int?)reader["ParentTask"];
+                    var taskType = (int)reader["taskType"];
+                    var projectId = (int)reader["projectId"];
+                    var startDate = (DateTime)reader["startDate"];
+                    var dueDate = (DateTime)reader["dueDate"];
+                    var title = (string)reader["title"];
+                    var actual = reader["actualWorkingHours"] == System.DBNull.Value ? null : (int?)reader["actualWorkingHours"];
+                    var isFinished = (bool)reader["isFinished"];
+                    ret.Add(new Task(id, parentTask, (int)taskType, projectId, startDate, dueDate, title, actual, isFinished));
                 }
 
             }
@@ -371,7 +381,7 @@ namespace Project_Management_System
 
             CloseConnection();
         }
-        protected string AddArrayParameters(SqlCommand sqlCommand,List<int> array, string paramName)
+        protected string AddArrayParameters(SqlCommand sqlCommand, List<int> array, string paramName)
         {
             /* An array cannot be simply added as a parameter to a SqlCommand so we need to loop through things and add it manually. 
              * Each item in the array will end up being it's own SqlParameter so the return value for this must be used as part of the
