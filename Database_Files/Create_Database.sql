@@ -1,4 +1,6 @@
 CREATE DATABASE ProjectManager_DB
+GO
+
 CREATE TABLE [project_Plan] (
   [projectId] int PRIMARY KEY IDENTITY(1, 1),
   [weekStartDay] int NOT NULL,
@@ -36,7 +38,7 @@ CREATE TABLE [task] (
   [startDate] datetime DEFAULT (GETDATE()),
   [dueDate] datetime DEFAULT (GETDATE()),
   [title] varchar(30) NOT NULL,
-  [actualWorkingDays] int,
+  [actualWorkingHours] int,
   [isFinished] BIT DEFAULT 0
 )
 GO

@@ -9,9 +9,9 @@ namespace Project_Management_System
 
     class DBMS
     {
-        private static string databaseName = "Test";
+        private const string databaseName = "ProjectManager_DB";
 
-        private SqlConnection co;
+        private readonly SqlConnection co;
         private SqlConnectionStringBuilder builder;
 
         /// <summary>
@@ -21,14 +21,11 @@ namespace Project_Management_System
         /// </summary>
         public DBMS()
         {
-            builder = new SqlConnectionStringBuilder();
-            builder.IntegratedSecurity = true;
-            
-            builder.DataSource = "localhost";
+            builder = new SqlConnectionStringBuilder {IntegratedSecurity = true, DataSource = "localhost"};
 
-            co = new SqlConnection();
-            co.ConnectionString = builder.ConnectionString;
-            
+
+            co = new SqlConnection {ConnectionString = builder.ConnectionString};
+
         }
         /// <summary>
         /// Tries to establish the connection
@@ -49,7 +46,31 @@ namespace Project_Management_System
 
         public List<Employee> GetAllEmployees()
         {
-            throw new NotImplementedException();
+            OpenConnection();
+
+            const string queryString = "SELECT * FROM [employee]";
+            var command = new SqlCommand(queryString, co);
+            var reader = command.ExecuteReader();
+
+            var ret = new List<Employee>();
+            try
+            {
+                while (reader.Read())
+                {
+                    var current = new Employee((int) reader["memberId"],(string) reader["name"],(string) reader["title"],(int) reader["workingHours"],(int) reader["cost"]);
+                    ret.Add(current);
+                }
+
+            }
+            finally
+            {
+                reader.Close();
+                CloseConnection();
+            }
+
+
+            return ret;
+
         }
 
         public void AddEmployee(Employee employee)
@@ -80,6 +101,33 @@ namespace Project_Management_System
         public Project GetProjectByID(int v)
         {
             throw new NotImplementedException();
+        }
+
+        private List<Project> ProjectQueryExecute(string queryString)
+        {
+            OpenConnection();
+
+            var command = new SqlCommand(queryString, co);
+            var reader = command.ExecuteReader();
+
+            var ret = new List<Project>();
+            try
+            {
+                while (reader.Read())
+                {
+                    var current = new Project((int)reader["projectId"], (string)reader["projectName"], (DateTime)reader["startDate"], (DateTime)reader["dueDate"],(int) reader["workingHours"],(int) reader["weekStartDay"]);
+                    ret.Add(current);
+                }
+
+            }
+            finally
+            {
+                reader.Close();
+                CloseConnection();
+            }
+
+
+            return ret;
         }
     }
 }

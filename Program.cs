@@ -19,6 +19,8 @@ namespace Project_Management_System
         {
             Application.ApplicationExit += Application_Exit;
 
+            var t = dbms.GetAllEmployees();
+            var tCapacity = t.Capacity;
             MessageBox.Show("developer note: database not integerated yet.");
             //dbms.OpenConnection();
             
