@@ -19,11 +19,16 @@ namespace GanttChart
         GanttChart ganttChart2;
         GanttChart ganttChart3;
 
+        private int projectId;
+        private bool showActualHours;
+
         // type = 0 -> no actual working hours else it will appear
         // takes the project that you wish to show it's chart
-        public FrmChart(int projectId, int type)
+        public FrmChart(int projectId, bool showActualHours = true)
         {
             InitializeComponent();
+            this.projectId = projectId;
+            this.showActualHours = showActualHours;
         }
 
         private void FrmChart_Load(object sender, EventArgs e)
