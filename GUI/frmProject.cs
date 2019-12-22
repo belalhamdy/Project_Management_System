@@ -34,6 +34,7 @@ namespace Project_Management_System.GUI
         {
             btnStartPlanning.Enabled = lstProjects.SelectedIndices.Count != 0;
             btnDelete.Enabled = lstProjects.SelectedIndices.Count != 0;
+            btnEditDelieverables.Enabled = lstProjects.SelectedIndices.Count != 0;
         }
 
         private void btnAddProject_Click(object sender, EventArgs e)
@@ -128,6 +129,13 @@ namespace Project_Management_System.GUI
         private void txtProjectName_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnEditDelieverables_Click(object sender, EventArgs e)
+        {
+            if (lstProjects.SelectedIndices.Count == 0) return;
+            frmDelieverable frm = new frmDelieverable(int.Parse(lstProjects.SelectedItems[0].Text));
+            frm.ShowDialog();
         }
     }
 }

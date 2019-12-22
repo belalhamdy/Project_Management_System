@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstEmployees = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numHours = new System.Windows.Forms.NumericUpDown();
             this.numCost = new System.Windows.Forms.NumericUpDown();
@@ -40,59 +39,35 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lstEmployees = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCost)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lstEmployees
-            // 
-            this.lstEmployees.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.lstEmployees.FullRowSelect = true;
-            this.lstEmployees.HideSelection = false;
-            this.lstEmployees.Location = new System.Drawing.Point(13, 13);
-            this.lstEmployees.MultiSelect = false;
-            this.lstEmployees.Name = "lstEmployees";
-            this.lstEmployees.Size = new System.Drawing.Size(581, 281);
-            this.lstEmployees.TabIndex = 0;
-            this.lstEmployees.UseCompatibleStateImageBehavior = false;
-            this.lstEmployees.View = System.Windows.Forms.View.Details;
-            this.lstEmployees.SelectedIndexChanged += new System.EventHandler(this.lstEmployees_SelectedIndexChanged);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.numHours);
-            this.groupBox1.Controls.Add(this.numCost);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.btnDeleteSelected);
-            this.groupBox1.Controls.Add(this.txtTitle);
-            this.groupBox1.Controls.Add(this.txtName);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.btnAdd);
-            this.groupBox1.Location = new System.Drawing.Point(13, 300);
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.lstEmployees);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(581, 167);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.Size = new System.Drawing.Size(598, 484);
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Employee Data";
+            this.groupBox1.Text = "Employees";
             // 
             // numHours
             // 
             this.numHours.Location = new System.Drawing.Point(429, 28);
             this.numHours.Maximum = new decimal(new int[] {
-            24,
+            18,
             0,
             0,
             0});
@@ -113,6 +88,11 @@
             // numCost
             // 
             this.numCost.Location = new System.Drawing.Point(374, 63);
+            this.numCost.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numCost.Name = "numCost";
             this.numCost.Size = new System.Drawing.Size(201, 20);
             this.numCost.TabIndex = 9;
@@ -135,7 +115,6 @@
             this.btnDeleteSelected.TabIndex = 7;
             this.btnDeleteSelected.Text = "Delete Selected";
             this.btnDeleteSelected.UseVisualStyleBackColor = true;
-            this.btnDeleteSelected.Click += new System.EventHandler(this.btnDeleteSelected_Click);
             // 
             // txtTitle
             // 
@@ -186,65 +165,102 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "ID";
-            this.columnHeader1.Width = 42;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Name";
-            this.columnHeader2.Width = 208;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Title";
-            this.columnHeader3.Width = 110;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Hours/Day";
-            this.columnHeader4.Width = 77;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Cost";
             this.columnHeader5.Width = 107;
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Hours/Day";
+            this.columnHeader4.Width = 77;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Title";
+            this.columnHeader3.Width = 110;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Name";
+            this.columnHeader2.Width = 208;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "ID";
+            this.columnHeader1.Width = 42;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.numHours);
+            this.groupBox2.Controls.Add(this.numCost);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.btnDeleteSelected);
+            this.groupBox2.Controls.Add(this.txtTitle);
+            this.groupBox2.Controls.Add(this.txtName);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.btnAdd);
+            this.groupBox2.Location = new System.Drawing.Point(6, 306);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(581, 167);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Employee Data";
+            // 
+            // lstEmployees
+            // 
+            this.lstEmployees.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.lstEmployees.FullRowSelect = true;
+            this.lstEmployees.HideSelection = false;
+            this.lstEmployees.Location = new System.Drawing.Point(6, 19);
+            this.lstEmployees.MultiSelect = false;
+            this.lstEmployees.Name = "lstEmployees";
+            this.lstEmployees.Size = new System.Drawing.Size(581, 281);
+            this.lstEmployees.TabIndex = 2;
+            this.lstEmployees.UseCompatibleStateImageBehavior = false;
+            this.lstEmployees.View = System.Windows.Forms.View.Details;
+            // 
             // frmEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 474);
+            this.ClientSize = new System.Drawing.Size(620, 505);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.lstEmployees);
             this.Name = "frmEmployee";
             this.Text = "Project Management";
             this.Load += new System.EventHandler(this.EmployeeForm_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCost)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView lstEmployees;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.NumericUpDown numHours;
+        private System.Windows.Forms.NumericUpDown numCost;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnDeleteSelected;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnDeleteSelected;
-        private System.Windows.Forms.NumericUpDown numHours;
-        private System.Windows.Forms.NumericUpDown numCost;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.ListView lstEmployees;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;

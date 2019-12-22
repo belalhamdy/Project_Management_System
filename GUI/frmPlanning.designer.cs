@@ -42,8 +42,14 @@
             this.btnSelectEmployee = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.lstSelectedEmployees = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label7 = new System.Windows.Forms.Label();
             this.lstEmployees = new System.Windows.Forms.ListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -123,23 +129,24 @@
             // numWorkingHours
             // 
             this.numWorkingHours.Location = new System.Drawing.Point(423, 66);
-            this.numWorkingHours.Minimum = new decimal(new int[] {
-            1,
+            this.numWorkingHours.Maximum = new decimal(new int[] {
+            1000000,
             0,
             0,
             0});
             this.numWorkingHours.Name = "numWorkingHours";
+            this.numWorkingHours.ReadOnly = true;
             this.numWorkingHours.Size = new System.Drawing.Size(104, 20);
             this.numWorkingHours.TabIndex = 17;
-            this.numWorkingHours.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // numActualWorkingHours
             // 
             this.numActualWorkingHours.Location = new System.Drawing.Point(423, 99);
+            this.numActualWorkingHours.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numActualWorkingHours.Name = "numActualWorkingHours";
             this.numActualWorkingHours.Size = new System.Drawing.Size(104, 20);
             this.numActualWorkingHours.TabIndex = 16;
@@ -151,6 +158,7 @@
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(219, 20);
             this.dtpDueDate.TabIndex = 15;
+            this.dtpDueDate.ValueChanged += new System.EventHandler(this.dtp_ValueChanged);
             // 
             // dtpStartDate
             // 
@@ -159,6 +167,7 @@
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(219, 20);
             this.dtpStartDate.TabIndex = 14;
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.dtp_ValueChanged);
             // 
             // groupBox2
             // 
@@ -208,6 +217,11 @@
             // 
             // lstSelectedEmployees
             // 
+            this.lstSelectedEmployees.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.lstSelectedEmployees.FullRowSelect = true;
             this.lstSelectedEmployees.HideSelection = false;
             this.lstSelectedEmployees.Location = new System.Drawing.Point(288, 38);
             this.lstSelectedEmployees.Name = "lstSelectedEmployees";
@@ -216,6 +230,20 @@
             this.lstSelectedEmployees.UseCompatibleStateImageBehavior = false;
             this.lstSelectedEmployees.View = System.Windows.Forms.View.Details;
             this.lstSelectedEmployees.SelectedIndexChanged += new System.EventHandler(this.lstSelectedEmployees_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "ID";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Name";
+            this.columnHeader2.Width = 91;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Hours/Day";
+            this.columnHeader3.Width = 78;
             // 
             // label7
             // 
@@ -228,13 +256,33 @@
             // 
             // lstEmployees
             // 
+            this.lstEmployees.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.lstEmployees.FullRowSelect = true;
             this.lstEmployees.HideSelection = false;
             this.lstEmployees.Location = new System.Drawing.Point(6, 38);
             this.lstEmployees.Name = "lstEmployees";
             this.lstEmployees.Size = new System.Drawing.Size(245, 90);
             this.lstEmployees.TabIndex = 14;
             this.lstEmployees.UseCompatibleStateImageBehavior = false;
+            this.lstEmployees.View = System.Windows.Forms.View.Details;
             this.lstEmployees.SelectedIndexChanged += new System.EventHandler(this.lstEmployees_SelectedIndexChanged);
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "ID";
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Name";
+            this.columnHeader5.Width = 97;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Hours/Day";
+            this.columnHeader6.Width = 77;
             // 
             // txtTitle
             // 
@@ -246,20 +294,20 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(306, 106);
+            this.label5.Location = new System.Drawing.Point(306, 101);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 13);
+            this.label5.Size = new System.Drawing.Size(114, 13);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Actual Working Hours";
+            this.label5.Text = "Actual Working Hours:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(306, 68);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 13);
+            this.label4.Size = new System.Drawing.Size(110, 13);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Working Hours/Day:";
+            this.label4.Text = "Req. Working Hours :";
             // 
             // label3
             // 
@@ -304,6 +352,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(593, 677);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmPlanning";
             this.Text = "Project Management";
             this.Load += new System.EventHandler(this.MainTaskForm_Load);
@@ -343,5 +393,11 @@
         private System.Windows.Forms.Button btnSelectEmployee;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnUnselect;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }

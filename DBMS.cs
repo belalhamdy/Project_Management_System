@@ -200,16 +200,22 @@ namespace Project_Management_System
 
         public List<Task> GetAllMainTasks(int projectID)
         {
-            const string queryString = "SELECT * FROM [task] WHERE [ParentTask] is NULL";
+            const string queryString = "SELECT * FROM [task] WHERE [ParentTask] is NULL AND [ProjectID] = @projectID";
+
             var command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@projectID", projectID);
+
             return GetTaskQueryExecute(command);
 
         }
 
         public List<Task> GetAllSubTasks(int taskID)
         {
-            const string queryString = "SELECT * FROM [task] WHERE [ParentTask] is not NULL";
+            const string queryString = "SELECT * FROM [task] WHERE [ParentTask] = @taskID";
+
             var command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@taskID", taskID);
+
             return GetTaskQueryExecute(command);
         }
 
@@ -322,7 +328,7 @@ namespace Project_Management_System
                 {
                     
                     var id = (int)reader["taskId"];
-                    var parentTask = (int?)reader["ParentTask"];
+                    var parentTask = reader["ParentTask"] == System.DBNull.Value ? (int?)null : (int)reader["ParentTask"];
                     var taskType = (int)reader["taskType"];
                     var projectId = (int)reader["projectId"];
                     var startDate = (DateTime)reader["startDate"];
@@ -365,6 +371,7 @@ namespace Project_Management_System
         //TODO: TEST IT
         public void SetEmployeesOnTask(int taskID, List<int> employeesID)
         {
+            if (employeesID.Count == 0) return;
             OpenConnection();
 
             var queryString = "";

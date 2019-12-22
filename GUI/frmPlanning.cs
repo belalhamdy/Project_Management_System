@@ -29,13 +29,13 @@ namespace Project_Management_System.GUI
         private void MainTaskForm_Load(object sender, EventArgs e)
         {
             ReloadTasksList();
+            
         }
         
         private void SetEntryToAdd()
         {
             txtTitle.Clear();
             dtpStartDate.Value = dtpDueDate.Value = DateTime.Now;
-            numWorkingHours.Value = numWorkingHours.Minimum;
             numActualWorkingHours.Value = numWorkingHours.Minimum;
             btnAddEdit.Text = "Add New Task";
             ReloadFreeEmployeesList();
@@ -47,7 +47,6 @@ namespace Project_Management_System.GUI
             txtTitle.Text = tag.Title;
             dtpStartDate.Value = tag.StartingDate;
             dtpDueDate.Value = tag.DueDate;
-            numWorkingHours.Value = tag.WorkingHours;
             numActualWorkingHours.Value = tag.ActualWorkingHours ?? 0;
             btnAddEdit.Text = "Edit Selected Task";
             ReloadFreeEmployeesList();
@@ -82,17 +81,21 @@ namespace Project_Management_System.GUI
             }
             trvTasks.Nodes.Clear();
             trvTasks.Nodes.Add(highNode);
-            trvTasks.SelectedNode = null;
+            trvTasks.SelectedNode = trvTasks.Nodes[0];
+            trvTasks.ExpandAll();
+            trvTasks.Nodes[0].EnsureVisible();
+            ReloadFreeEmployeesList();
+            SetEntryToAdd();
         }
         private void LoadEmployeesAndSubtasksForTask(Task tsk)
         {
             tsk.AssignedEmployees = Program.dbms.GetEmployeesOnTask(tsk.ID);
             List<Task> subtasks = Program.dbms.GetAllSubTasks(tsk.ID);
-            tsk.ClearSubtasks();
+            tsk.SubTasks.Clear();
             foreach (var subtsk in subtasks)
             {
                 LoadEmployeesAndSubtasksForTask(subtsk);
-                tsk.AddSubtask(subtsk);
+                tsk.SubTasks.Add(subtsk);
             }
         }
         private void GenerateSubNodesFromTask(TreeNode node)
@@ -118,6 +121,8 @@ namespace Project_Management_System.GUI
             {
                 var lvi = new ListViewItem(emp.ID.ToString());
                 lvi.SubItems.Add(emp.Name);
+                lvi.SubItems.Add(emp.HoursDay.ToString());
+                lvi.SubItems.Add(emp.Cost.ToString());
                 lv.Items.Add(lvi);
             }
         }
@@ -135,7 +140,12 @@ namespace Project_Management_System.GUI
 
         private void btnAddEdit_Click(object sender, EventArgs e)
         {
-            if (trvTasks.SelectedNode == null) return;
+            if (trvTasks.SelectedNode == null)
+            {
+                MessageBox.Show("Nothing is selected!", "Selection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             txtTitle.Text = txtTitle.Text.Trim();
             if (txtTitle.Text == "")
             {
@@ -183,19 +193,36 @@ namespace Project_Management_System.GUI
                 try
                 {
                     int taskID = Program.dbms.AddTask(addedTask);
-                    Program.dbms.SetEmployeesOnTask(taskID, GetSelectedEmployees());
+                    List<int> lst = GetSelectedEmployees();
+                    if (lst == null) return;
+                    Program.dbms.SetEmployeesOnTask(taskID, lst);
+                    ReloadTasksList();
                 }
                 catch(Exception ex)
                 {
                     MessageBox.Show("Unable to add to database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                SetEntryToAdd();
+                
             }
             else if (currentMode == EntryMode.Edit)
             {
-                int taskID = ((Task)trvTasks.SelectedNode.Tag).ID;
-                Program.dbms.UnselectAllEmployeesFromTask(taskID);
-                Program.dbms.SetEmployeesOnTask(taskID, GetSelectedEmployees());
+                try
+                {
+                    int taskID = ((Task)trvTasks.SelectedNode.Tag).ID;
+                    Program.dbms.UnselectAllEmployeesFromTask(taskID);
+                    List<int> lst = GetSelectedEmployees();
+                    if (lst == null) return;
+                    Program.dbms.SetEmployeesOnTask(taskID, lst);
+                    ReloadTasksList();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Unable to add to database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private List<int> GetSelectedEmployees()
@@ -204,6 +231,11 @@ namespace Project_Management_System.GUI
             foreach(ListViewItem lvi in lstSelectedEmployees.Items)
             {
                 lst.Add(int.Parse(lvi.Text));
+                if (int.Parse(lvi.SubItems[2].Text) < OwnerProject.NumberHrsPerDay)
+                {
+                    MessageBox.Show($"Employee {lvi.SubItems[1].Text}'s working hours per day are not suffient for this project.", "Working Hours", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return null;
+                }
             }
             return lst;
         }
@@ -217,7 +249,7 @@ namespace Project_Management_System.GUI
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (trvTasks.SelectedNode.Tag == null) return;
+            if (trvTasks.SelectedNode == null || trvTasks.SelectedNode.Tag == null) return;
             try
             {
                 if (MessageBox.Show("Are you sure you want to delete the selected task?", "Attention",
@@ -246,6 +278,11 @@ namespace Project_Management_System.GUI
             ListViewItem v = lstSelectedEmployees.SelectedItems[0];
             lstSelectedEmployees.Items.Remove(v);
             lstEmployees.Items.Add(v);
+        }
+
+        private void dtp_ValueChanged(object sender, EventArgs e)
+        {
+            numWorkingHours.Value = Math.Max(numWorkingHours.Minimum, (dtpDueDate.Value - dtpStartDate.Value).Days);
         }
     }
 }

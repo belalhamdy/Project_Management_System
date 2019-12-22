@@ -32,6 +32,7 @@
             this.btnStartPlanning = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnEditDelieverables = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.lstProjects = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -61,10 +62,9 @@
             // txtProjectName
             // 
             this.txtProjectName.AccessibleName = "";
-            this.txtProjectName.Location = new System.Drawing.Point(119, 23);
-            this.txtProjectName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProjectName.Location = new System.Drawing.Point(89, 19);
             this.txtProjectName.Name = "txtProjectName";
-            this.txtProjectName.Size = new System.Drawing.Size(345, 22);
+            this.txtProjectName.Size = new System.Drawing.Size(260, 20);
             this.txtProjectName.TabIndex = 1;
             this.txtProjectName.TextChanged += new System.EventHandler(this.txtProjectName_TextChanged);
             // 
@@ -74,10 +74,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStartPlanning.BackColor = System.Drawing.SystemColors.Control;
             this.btnStartPlanning.Enabled = false;
-            this.btnStartPlanning.Location = new System.Drawing.Point(8, 395);
-            this.btnStartPlanning.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStartPlanning.Location = new System.Drawing.Point(6, 321);
             this.btnStartPlanning.Name = "btnStartPlanning";
-            this.btnStartPlanning.Size = new System.Drawing.Size(743, 28);
+            this.btnStartPlanning.Size = new System.Drawing.Size(557, 23);
             this.btnStartPlanning.TabIndex = 1;
             this.btnStartPlanning.Text = "Start Planning Selected Project";
             this.btnStartPlanning.UseVisualStyleBackColor = false;
@@ -86,10 +85,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 27);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(6, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 17);
+            this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Project Name: ";
             // 
@@ -97,17 +95,30 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnEditDelieverables);
             this.groupBox2.Controls.Add(this.btnDelete);
             this.groupBox2.Controls.Add(this.lstProjects);
             this.groupBox2.Controls.Add(this.btnStartPlanning);
-            this.groupBox2.Location = new System.Drawing.Point(16, 38);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Location = new System.Drawing.Point(12, 31);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(759, 474);
+            this.groupBox2.Size = new System.Drawing.Size(569, 414);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Available Projects";
+            // 
+            // btnEditDelieverables
+            // 
+            this.btnEditDelieverables.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditDelieverables.BackColor = System.Drawing.SystemColors.Control;
+            this.btnEditDelieverables.Enabled = false;
+            this.btnEditDelieverables.Location = new System.Drawing.Point(6, 356);
+            this.btnEditDelieverables.Name = "btnEditDelieverables";
+            this.btnEditDelieverables.Size = new System.Drawing.Size(557, 23);
+            this.btnEditDelieverables.TabIndex = 3;
+            this.btnEditDelieverables.Text = "Edit Delieverables for selected project";
+            this.btnEditDelieverables.UseVisualStyleBackColor = false;
+            this.btnEditDelieverables.Click += new System.EventHandler(this.btnEditDelieverables_Click);
             // 
             // btnDelete
             // 
@@ -115,10 +126,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.BackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(8, 431);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.Location = new System.Drawing.Point(6, 385);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(743, 28);
+            this.btnDelete.Size = new System.Drawing.Size(557, 23);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Delete Selected Project";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -138,11 +148,10 @@
             this.columnHeader7});
             this.lstProjects.FullRowSelect = true;
             this.lstProjects.HideSelection = false;
-            this.lstProjects.Location = new System.Drawing.Point(8, 23);
-            this.lstProjects.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstProjects.Location = new System.Drawing.Point(6, 19);
             this.lstProjects.MultiSelect = false;
             this.lstProjects.Name = "lstProjects";
-            this.lstProjects.Size = new System.Drawing.Size(741, 363);
+            this.lstProjects.Size = new System.Drawing.Size(557, 296);
             this.lstProjects.TabIndex = 0;
             this.lstProjects.UseCompatibleStateImageBehavior = false;
             this.lstProjects.View = System.Windows.Forms.View.Details;
@@ -187,10 +196,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(265, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(199, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(245, 17);
+            this.label1.Size = new System.Drawing.Size(194, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Welcome to Project Management";
             // 
@@ -207,11 +215,9 @@
             this.groupBox1.Controls.Add(this.btnAddProject);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtProjectName);
-            this.groupBox1.Location = new System.Drawing.Point(16, 519);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 451);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(768, 164);
+            this.groupBox1.Size = new System.Drawing.Size(576, 133);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add New Project";
@@ -228,26 +234,23 @@
             "Wednesday",
             "Thursday",
             "Friday"});
-            this.cmbStartDay.Location = new System.Drawing.Point(589, 89);
-            this.cmbStartDay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbStartDay.Location = new System.Drawing.Point(442, 72);
             this.cmbStartDay.Name = "cmbStartDay";
-            this.cmbStartDay.Size = new System.Drawing.Size(160, 24);
+            this.cmbStartDay.Size = new System.Drawing.Size(121, 21);
             this.cmbStartDay.TabIndex = 11;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(408, 92);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(306, 75);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(170, 17);
+            this.label5.Size = new System.Drawing.Size(130, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "Starting Day of the Week:";
             // 
             // numWorkingHours
             // 
-            this.numWorkingHours.Location = new System.Drawing.Point(589, 57);
-            this.numWorkingHours.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numWorkingHours.Location = new System.Drawing.Point(442, 46);
             this.numWorkingHours.Maximum = new decimal(new int[] {
             24,
             0,
@@ -259,7 +262,7 @@
             0,
             0});
             this.numWorkingHours.Name = "numWorkingHours";
-            this.numWorkingHours.Size = new System.Drawing.Size(161, 22);
+            this.numWorkingHours.Size = new System.Drawing.Size(121, 20);
             this.numWorkingHours.TabIndex = 3;
             this.numWorkingHours.Value = new decimal(new int[] {
             1,
@@ -270,58 +273,52 @@
             // dtpDueDate
             // 
             this.dtpDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDueDate.Location = new System.Drawing.Point(119, 87);
-            this.dtpDueDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDueDate.Location = new System.Drawing.Point(89, 71);
             this.dtpDueDate.Name = "dtpDueDate";
-            this.dtpDueDate.Size = new System.Drawing.Size(257, 22);
+            this.dtpDueDate.Size = new System.Drawing.Size(194, 20);
             this.dtpDueDate.TabIndex = 7;
             // 
             // dtpStartDate
             // 
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpStartDate.Location = new System.Drawing.Point(119, 55);
-            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpStartDate.Location = new System.Drawing.Point(89, 45);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(257, 22);
+            this.dtpStartDate.Size = new System.Drawing.Size(194, 20);
             this.dtpStartDate.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(441, 59);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(331, 48);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 17);
+            this.label4.Size = new System.Drawing.Size(105, 13);
             this.label4.TabIndex = 2;
             this.label4.Text = "Working Hours/Day:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 92);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(22, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 17);
+            this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Due Date:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 59);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(6, 48);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(95, 17);
+            this.label6.Size = new System.Drawing.Size(72, 13);
             this.label6.TabIndex = 4;
             this.label6.Text = "Starting Date:";
             // 
             // btnAddProject
             // 
             this.btnAddProject.BackColor = System.Drawing.SystemColors.Control;
-            this.btnAddProject.Location = new System.Drawing.Point(12, 122);
-            this.btnAddProject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddProject.Location = new System.Drawing.Point(9, 99);
             this.btnAddProject.Name = "btnAddProject";
-            this.btnAddProject.Size = new System.Drawing.Size(739, 28);
+            this.btnAddProject.Size = new System.Drawing.Size(554, 23);
             this.btnAddProject.TabIndex = 12;
             this.btnAddProject.Text = "Add Project";
             this.btnAddProject.UseVisualStyleBackColor = false;
@@ -330,10 +327,9 @@
             // btnEmployees
             // 
             this.btnEmployees.BackColor = System.Drawing.SystemColors.Control;
-            this.btnEmployees.Location = new System.Drawing.Point(16, 706);
-            this.btnEmployees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEmployees.Location = new System.Drawing.Point(12, 603);
             this.btnEmployees.Name = "btnEmployees";
-            this.btnEmployees.Size = new System.Drawing.Size(768, 28);
+            this.btnEmployees.Size = new System.Drawing.Size(576, 23);
             this.btnEmployees.TabIndex = 3;
             this.btnEmployees.Text = "Manage Employees";
             this.btnEmployees.UseVisualStyleBackColor = false;
@@ -341,15 +337,14 @@
             // 
             // frmProject
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(791, 747);
+            this.ClientSize = new System.Drawing.Size(593, 638);
             this.Controls.Add(this.btnEmployees);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "frmProject";
             this.Text = "Project Management";
@@ -389,5 +384,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.Button btnEditDelieverables;
     }
 }
