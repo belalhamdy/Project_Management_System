@@ -17,9 +17,9 @@ namespace Project_Management_System.Entities
 
             ID = id;
         }
-        public Employee(string name, string title, int hours, int cost) : this(-1, name, title, hours, cost)
-        {}
-        
+        public Employee(string name, string title, int hours, int cost)
+            : this(-1, name, title, hours, cost) { }
+
         public int ID { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }

@@ -8,7 +8,7 @@ namespace Project_Management_System.Entities
 {
     public class Project
     {
-        public Project(int id , string projectName, DateTime startingDate, DateTime dueDate, int hrsPerDay, int startingOfWeek)
+        public Project(int id, string projectName, DateTime startingDate, DateTime dueDate, int hrsPerDay, int startingOfWeek)
         {
             ProjectName = projectName;
             StartingDate = startingDate;
@@ -18,9 +18,8 @@ namespace Project_Management_System.Entities
 
             ID = id;
         }
-        public Project(string projectName, DateTime startingDate, DateTime dueDate, int hrsPerDay, int startingOfWeek) : this (-1,  projectName,  startingDate,  dueDate,  hrsPerDay, startingOfWeek)
-        {
-        }
+        public Project(string projectName, DateTime startingDate, DateTime dueDate, int hrsPerDay, int startingOfWeek)
+            : this(-1, projectName, startingDate, dueDate, hrsPerDay, startingOfWeek) { }
 
         public int ID { get; set; }
         public string ProjectName { get; set; }

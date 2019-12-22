@@ -16,7 +16,8 @@ namespace Project_Management_System.Entities
             Title = title;
             Description = description;
         }
-        public Deliverable(int projectId, bool isFinished, string title, string description) :this(-1, projectId, isFinished, title, description) { }
+        public Deliverable(int projectId, bool isFinished, string title, string description)
+            :this(-1, projectId, isFinished, title, description) { }
 
 
 

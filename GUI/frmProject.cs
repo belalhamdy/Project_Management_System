@@ -56,14 +56,12 @@ namespace Project_Management_System.GUI
                 Program.dbms.AddProject(
                         new Project(txtProjectName.Text,
                             dtpStartDate.Value, dtpDueDate.Value,
-                            (int)numCost.Value,
                             (int)numWorkingHours.Value,
                             cmbStartDay.SelectedIndex)
                         );
                 ReloadProjectsList();
                 txtProjectName.Clear();
                 dtpStartDate.Value = dtpDueDate.Value = DateTime.Now;
-                numCost.Value = numCost.Minimum;
                 numWorkingHours.Value = numWorkingHours.Minimum;
                 cmbStartDay.SelectedIndex = 0;
                 
@@ -104,7 +102,7 @@ namespace Project_Management_System.GUI
             if (lstProjects.SelectedIndices.Count == 0) return;
 
             Project ret = Program.dbms.GetProjectByID(int.Parse(lstProjects.SelectedItems[0].Text));
-            frmTasks frm = new frmTasks(ret);
+            frmPlanning frm = new frmPlanning(ret);
             this.Hide();
             frm.ShowDialog();
             this.Show();

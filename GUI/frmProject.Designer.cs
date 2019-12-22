@@ -34,6 +34,13 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.lstProjects = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbStartDay = new System.Windows.Forms.ComboBox();
@@ -46,19 +53,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnAddProject = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numCost = new System.Windows.Forms.NumericUpDown();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numWorkingHours)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCost)).BeginInit();
             this.SuspendLayout();
             // 
             // txtProjectName
@@ -143,6 +140,41 @@
             this.lstProjects.View = System.Windows.Forms.View.Details;
             this.lstProjects.SelectedIndexChanged += new System.EventHandler(this.lstEmployees_SelectedIndexChanged);
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "ID";
+            this.columnHeader1.Width = 47;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Project Name";
+            this.columnHeader2.Width = 96;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Starting Date";
+            this.columnHeader3.Width = 83;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Due Date";
+            this.columnHeader4.Width = 72;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Hours/Day";
+            this.columnHeader5.Width = 76;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Cost";
+            this.columnHeader6.Width = 77;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Week Start";
+            this.columnHeader7.Width = 78;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -155,8 +187,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.numCost);
-            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.cmbStartDay);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.numWorkingHours);
@@ -203,7 +233,7 @@
             // 
             // numWorkingHours
             // 
-            this.numWorkingHours.Location = new System.Drawing.Point(442, 20);
+            this.numWorkingHours.Location = new System.Drawing.Point(442, 46);
             this.numWorkingHours.Maximum = new decimal(new int[] {
             24,
             0,
@@ -242,11 +272,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(355, 22);
+            this.label4.Location = new System.Drawing.Point(331, 48);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(81, 13);
+            this.label4.Size = new System.Drawing.Size(105, 13);
             this.label4.TabIndex = 2;
-            this.label4.Text = "Working Hours:";
+            this.label4.Text = "Working Hours/Day:";
             // 
             // label3
             // 
@@ -288,62 +318,6 @@
             this.btnEmployees.UseVisualStyleBackColor = false;
             this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(378, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 13);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Total Cost:";
-            // 
-            // numCost
-            // 
-            this.numCost.Location = new System.Drawing.Point(442, 46);
-            this.numCost.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.numCost.Name = "numCost";
-            this.numCost.Size = new System.Drawing.Size(121, 20);
-            this.numCost.TabIndex = 9;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "ID";
-            this.columnHeader1.Width = 47;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Project Name";
-            this.columnHeader2.Width = 96;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Starting Date";
-            this.columnHeader3.Width = 83;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Due Date";
-            this.columnHeader4.Width = 72;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Hours/Day";
-            this.columnHeader5.Width = 76;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Cost";
-            this.columnHeader6.Width = 77;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Week Start";
-            this.columnHeader7.Width = 78;
-            // 
             // frmProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,7 +336,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numWorkingHours)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCost)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -387,8 +360,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cmbStartDay;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numCost;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;

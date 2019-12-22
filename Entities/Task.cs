@@ -6,19 +6,16 @@ namespace Project_Management_System.Entities
 {
     public class Task
     {
-
-        public Task(int id, int parentTaskId, int taskType, int projectId, DateTime startingDate, DateTime dueDate,
-            string title, int actualWorkingHours, bool isFinished)
+        public enum TypeOfTask
         {
-            ID = id;
-            
+            Task = 0, SubTask, Milestone = 2
         }
 
         public Task(int id, int? parentTask, int taskType, int projectId, DateTime startingDate, DateTime dueDate, string title, int? actualWorkingHours, bool isFinished)
         {
             ID = id;
             this.parentTask = parentTask;
-            TaskType = taskType;
+            TaskType = (TypeOfTask)taskType;
             ProjectID = projectId;
             StartingDate = startingDate;
             DueDate = dueDate;
@@ -26,10 +23,12 @@ namespace Project_Management_System.Entities
             ActualWorkingHours = actualWorkingHours;
             IsFinished = isFinished;
         }
-        public Task( int? parentTask, int taskType, int projectId, DateTime startingDate, DateTime dueDate, string title, int? actualWorkingHours, bool isFinished): this( -1,  parentTask,  taskType,  projectId,  startingDate,  dueDate, title, actualWorkingHours, isFinished) { }
+        public Task( int? parentTask, int taskType, int projectId, DateTime startingDate, DateTime dueDate, string title, int? actualWorkingHours, bool isFinished)
+            : this( -1,  parentTask,  taskType,  projectId,  startingDate,  dueDate, title, actualWorkingHours, isFinished) { }
+
         public int ID { get; set; }
         private int? parentTask;
-        public int TaskType { get; set; }
+        public TypeOfTask TaskType { get; set; }
 
         public int ProjectID { get; set; }
         public DateTime StartingDate { get; set; }
@@ -38,17 +37,21 @@ namespace Project_Management_System.Entities
         public int? ActualWorkingHours { get; set; }
         public bool IsFinished { get; set; }
 
-        public List<Task> DependantTasks { get; set; }
         private List<Task> _SubTasks = new List<Task>();
         public List<Employee> AssignedEmployees { get; set; }
 
-
-
         public int WorkingHours { get; set; }
 
-        public bool IsMilestone { get; set; }
-
-
+        public bool IsMilestone
+        {
+            get {
+                return TaskType == TypeOfTask.Milestone;
+            }
+            set {
+                if (value == true) TaskType = TypeOfTask.Milestone;
+                else TaskType = TypeOfTask.Task;
+            }
+        }
 
         public ReadOnlyCollection<Task> SubTasks
         {
@@ -80,6 +83,14 @@ namespace Project_Management_System.Entities
             {
                 throw new TaskException("Given task is not a subtask of this task.");
             }
+        }
+        public void ClearSubtasks()
+        {
+            _SubTasks.Clear();
+        }
+        public override string ToString()
+        {
+            throw new NotImplementedException();
         }
     }
 }

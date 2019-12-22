@@ -27,6 +27,8 @@ namespace Project_Management_System
             co = new SqlConnection {ConnectionString = builder.ConnectionString};
 
         }
+
+
         /// <summary>
         /// Tries to establish the connection
         /// </summary>
@@ -41,7 +43,6 @@ namespace Project_Management_System
         public void CloseConnection()
         {
             co.Close();
-            co.Dispose();
         }
 
         public List<Employee> GetAllEmployees()
@@ -128,6 +129,26 @@ namespace Project_Management_System
 
 
             return ret;
+        }
+
+        public List<Employee> GetEmployeesOnTask(int taskID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Employee> GetAllFreeEmployees()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Task> GetAllMainTasks(int projectID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Task> GetAllSubTasks(int taskID)
+        {
+            throw new NotImplementedException();
         }
     }
 }
