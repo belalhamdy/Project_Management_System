@@ -64,7 +64,7 @@
             this.groupBox1.Controls.Add(this.TaskGroup);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(787, 617);
+            this.groupBox1.Size = new System.Drawing.Size(570, 653);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tasks";
@@ -73,8 +73,9 @@
             // 
             this.trvTasks.Location = new System.Drawing.Point(6, 19);
             this.trvTasks.Name = "trvTasks";
-            this.trvTasks.Size = new System.Drawing.Size(775, 262);
+            this.trvTasks.Size = new System.Drawing.Size(558, 298);
             this.trvTasks.TabIndex = 5;
+            this.trvTasks.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvTasks_AfterSelect);
             // 
             // TaskGroup
             // 
@@ -92,16 +93,16 @@
             this.TaskGroup.Controls.Add(this.label2);
             this.TaskGroup.Controls.Add(this.label1);
             this.TaskGroup.Controls.Add(this.btnAddEdit);
-            this.TaskGroup.Location = new System.Drawing.Point(6, 287);
+            this.TaskGroup.Location = new System.Drawing.Point(6, 323);
             this.TaskGroup.Name = "TaskGroup";
-            this.TaskGroup.Size = new System.Drawing.Size(775, 324);
+            this.TaskGroup.Size = new System.Drawing.Size(558, 324);
             this.TaskGroup.TabIndex = 4;
             this.TaskGroup.TabStop = false;
             this.TaskGroup.Text = "Task";
             // 
             // btnUnselect
             // 
-            this.btnUnselect.Location = new System.Drawing.Point(559, 0);
+            this.btnUnselect.Location = new System.Drawing.Point(338, 0);
             this.btnUnselect.Name = "btnUnselect";
             this.btnUnselect.Size = new System.Drawing.Size(204, 23);
             this.btnUnselect.TabIndex = 19;
@@ -113,14 +114,15 @@
             // 
             this.btnRemove.Location = new System.Drawing.Point(9, 297);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(760, 23);
+            this.btnRemove.Size = new System.Drawing.Size(533, 23);
             this.btnRemove.TabIndex = 18;
             this.btnRemove.Text = "Remove Selected Task";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // numWorkingHours
             // 
-            this.numWorkingHours.Location = new System.Drawing.Point(318, 64);
+            this.numWorkingHours.Location = new System.Drawing.Point(423, 66);
             this.numWorkingHours.Minimum = new decimal(new int[] {
             1,
             0,
@@ -137,7 +139,7 @@
             // 
             // numActualWorkingHours
             // 
-            this.numActualWorkingHours.Location = new System.Drawing.Point(318, 97);
+            this.numActualWorkingHours.Location = new System.Drawing.Point(423, 99);
             this.numActualWorkingHours.Name = "numActualWorkingHours";
             this.numActualWorkingHours.Size = new System.Drawing.Size(104, 20);
             this.numActualWorkingHours.TabIndex = 16;
@@ -147,7 +149,7 @@
             this.dtpDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDueDate.Location = new System.Drawing.Point(81, 98);
             this.dtpDueDate.Name = "dtpDueDate";
-            this.dtpDueDate.Size = new System.Drawing.Size(104, 20);
+            this.dtpDueDate.Size = new System.Drawing.Size(219, 20);
             this.dtpDueDate.TabIndex = 15;
             // 
             // dtpStartDate
@@ -155,7 +157,7 @@
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpStartDate.Location = new System.Drawing.Point(81, 62);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(104, 20);
+            this.dtpStartDate.Size = new System.Drawing.Size(219, 20);
             this.dtpStartDate.TabIndex = 14;
             // 
             // groupBox2
@@ -168,7 +170,7 @@
             this.groupBox2.Controls.Add(this.lstEmployees);
             this.groupBox2.Location = new System.Drawing.Point(9, 128);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(760, 134);
+            this.groupBox2.Size = new System.Drawing.Size(541, 134);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Employees";
@@ -176,27 +178,29 @@
             // btnUnselectEmployee
             // 
             this.btnUnselectEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnUnselectEmployee.Location = new System.Drawing.Point(368, 87);
+            this.btnUnselectEmployee.Location = new System.Drawing.Point(257, 87);
             this.btnUnselectEmployee.Name = "btnUnselectEmployee";
             this.btnUnselectEmployee.Size = new System.Drawing.Size(25, 25);
             this.btnUnselectEmployee.TabIndex = 20;
             this.btnUnselectEmployee.Text = "<";
             this.btnUnselectEmployee.UseVisualStyleBackColor = true;
+            this.btnUnselectEmployee.Click += new System.EventHandler(this.btnUnselectEmployee_Click);
             // 
             // btnSelectEmployee
             // 
             this.btnSelectEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelectEmployee.Location = new System.Drawing.Point(368, 56);
+            this.btnSelectEmployee.Location = new System.Drawing.Point(257, 56);
             this.btnSelectEmployee.Name = "btnSelectEmployee";
             this.btnSelectEmployee.Size = new System.Drawing.Size(25, 25);
             this.btnSelectEmployee.TabIndex = 19;
             this.btnSelectEmployee.Text = ">";
             this.btnSelectEmployee.UseVisualStyleBackColor = true;
+            this.btnSelectEmployee.Click += new System.EventHandler(this.btnSelectEmployee_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(396, 22);
+            this.label8.Location = new System.Drawing.Point(285, 22);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(103, 13);
             this.label8.TabIndex = 17;
@@ -205,9 +209,9 @@
             // lstSelectedEmployees
             // 
             this.lstSelectedEmployees.HideSelection = false;
-            this.lstSelectedEmployees.Location = new System.Drawing.Point(399, 38);
+            this.lstSelectedEmployees.Location = new System.Drawing.Point(288, 38);
             this.lstSelectedEmployees.Name = "lstSelectedEmployees";
-            this.lstSelectedEmployees.Size = new System.Drawing.Size(355, 90);
+            this.lstSelectedEmployees.Size = new System.Drawing.Size(245, 90);
             this.lstSelectedEmployees.TabIndex = 16;
             this.lstSelectedEmployees.UseCompatibleStateImageBehavior = false;
             this.lstSelectedEmployees.View = System.Windows.Forms.View.Details;
@@ -227,7 +231,7 @@
             this.lstEmployees.HideSelection = false;
             this.lstEmployees.Location = new System.Drawing.Point(6, 38);
             this.lstEmployees.Name = "lstEmployees";
-            this.lstEmployees.Size = new System.Drawing.Size(356, 90);
+            this.lstEmployees.Size = new System.Drawing.Size(245, 90);
             this.lstEmployees.TabIndex = 14;
             this.lstEmployees.UseCompatibleStateImageBehavior = false;
             this.lstEmployees.SelectedIndexChanged += new System.EventHandler(this.lstEmployees_SelectedIndexChanged);
@@ -236,13 +240,13 @@
             // 
             this.txtTitle.Location = new System.Drawing.Point(39, 32);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(383, 20);
+            this.txtTitle.Size = new System.Drawing.Size(488, 20);
             this.txtTitle.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(201, 104);
+            this.label5.Location = new System.Drawing.Point(306, 106);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(111, 13);
             this.label5.TabIndex = 5;
@@ -251,7 +255,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(201, 66);
+            this.label4.Location = new System.Drawing.Point(306, 68);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 13);
             this.label4.TabIndex = 4;
@@ -288,7 +292,7 @@
             // 
             this.btnAddEdit.Location = new System.Drawing.Point(9, 268);
             this.btnAddEdit.Name = "btnAddEdit";
-            this.btnAddEdit.Size = new System.Drawing.Size(760, 23);
+            this.btnAddEdit.Size = new System.Drawing.Size(533, 23);
             this.btnAddEdit.TabIndex = 0;
             this.btnAddEdit.Text = "Add Task";
             this.btnAddEdit.UseVisualStyleBackColor = true;
@@ -298,7 +302,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 639);
+            this.ClientSize = new System.Drawing.Size(593, 677);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmPlanning";
             this.Text = "Project Management";

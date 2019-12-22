@@ -41,7 +41,7 @@ namespace Project_Management_System.GUI
             }
             try
             {
-                Program.dbms.AddEmployee(new Employee(txtName.Text, txtTitle.Text, (int)numHours.Value, (int)numCost.Value));
+                Program.dbms.AddEmployee(new Employee(txtName.Text, txtTitle.Text, (int)numHours.Value, (int)numCost.Value, null));
                 ReloadEmployeesList();
 
                 txtName.Clear();

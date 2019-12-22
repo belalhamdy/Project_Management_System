@@ -58,7 +58,7 @@ namespace Project_Management_System.GUI
 
         private void btnUnselect_Click(object sender, EventArgs e)
         {
-            trvTasks.SelectedNode = null;
+            SetEntryToAdd();
         }
 
 
@@ -179,10 +179,73 @@ namespace Project_Management_System.GUI
                 int taskType = (int)Task.TypeOfTask.Task;
                 int? actualWork = numActualWorkingHours.Value == 0 ? null : (int?)numActualWorkingHours.Value;
                 Task addedTask = new Task(id, taskType, OwnerProject.ID, dtpStartDate.Value, dtpDueDate.Value, txtTitle.Text, actualWork, isFinished);
-                Program.dbms.AddTask(addedTask);
+
+                try
+                {
+                    int taskID = Program.dbms.AddTask(addedTask);
+                    Program.dbms.SetEmployeesOnTask(taskID, GetSelectedEmployees());
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Unable to add to database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                SetEntryToAdd();
             }
             else if (currentMode == EntryMode.Edit)
-                parent = trvTasks.SelectedNode.Parent;
+            {
+                int taskID = ((Task)trvTasks.SelectedNode.Tag).ID;
+                Program.dbms.UnselectAllEmployeesFromTask(taskID);
+                Program.dbms.SetEmployeesOnTask(taskID, GetSelectedEmployees());
+            }
+        }
+        private List<int> GetSelectedEmployees()
+        {
+            List<int> lst = new List<int>();
+            foreach(ListViewItem lvi in lstSelectedEmployees.Items)
+            {
+                lst.Add(int.Parse(lvi.Text));
+            }
+            return lst;
+        }
+        private void trvTasks_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (trvTasks.SelectedNode.Tag == null)
+                SetEntryToAdd();
+            else
+                SetEntryToEdit((Task)trvTasks.SelectedNode.Tag);
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if (trvTasks.SelectedNode.Tag == null) return;
+            try
+            {
+                if (MessageBox.Show("Are you sure you want to delete the selected task?", "Attention",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Program.dbms.RemoveTask(((Task)trvTasks.SelectedNode.Tag).ID);
+                    ReloadTasksList();
+                    SetEntryToAdd();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to delete from database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSelectEmployee_Click(object sender, EventArgs e)
+        {
+            ListViewItem v = lstEmployees.SelectedItems[0];
+            lstEmployees.Items.Remove(v);
+            lstSelectedEmployees.Items.Add(v);
+        }
+
+        private void btnUnselectEmployee_Click(object sender, EventArgs e)
+        {
+            ListViewItem v = lstSelectedEmployees.SelectedItems[0];
+            lstSelectedEmployees.Items.Remove(v);
+            lstEmployees.Items.Add(v);
         }
     }
 }
