@@ -14,7 +14,7 @@ namespace Project_Management_System.Entities
         public Task(int id, int? parentTask, int taskType, int projectId, DateTime startingDate, DateTime dueDate, string title, int? actualWorkingHours, bool isFinished)
         {
             ID = id;
-            this.parentTask = parentTask;
+            this.ParentTask = parentTask;
             TaskType = (TypeOfTask)taskType;
             ProjectID = projectId;
             StartingDate = startingDate;
@@ -27,7 +27,7 @@ namespace Project_Management_System.Entities
             : this( -1,  parentTask,  taskType,  projectId,  startingDate,  dueDate, title, actualWorkingHours, isFinished) { }
 
         public int ID { get; set; }
-        private int? parentTask;
+        public int? ParentTask { get; set; }
         public TypeOfTask TaskType { get; set; }
 
         public int ProjectID { get; set; }
@@ -66,10 +66,10 @@ namespace Project_Management_System.Entities
                 throw new TaskException("Subtask's working window does not fit in its parent.");
             else
             {
-                if (task.parentTask != null)
+                if (task.ParentTask != null)
                     throw new TaskException("Task is already a subtask of another task.");
                 _SubTasks.Add(task);
-                task.parentTask = this.ID;
+                task.ParentTask = this.ID;
             }
         }
         public void RemoveSubtask(Task task)
@@ -77,7 +77,7 @@ namespace Project_Management_System.Entities
             try
             {
                 _SubTasks.Remove(task);
-                task.parentTask = null;
+                task.ParentTask = null;
             }
             catch (Exception)
             {

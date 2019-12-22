@@ -21,14 +21,12 @@ namespace Project_Management_System
         /// </summary>
         public DBMS()
         {
-            builder = new SqlConnectionStringBuilder {IntegratedSecurity = true, DataSource = "localhost"};
+            builder = new SqlConnectionStringBuilder { IntegratedSecurity = true, DataSource = "localhost" };
 
 
-            co = new SqlConnection {ConnectionString = builder.ConnectionString};
+            co = new SqlConnection { ConnectionString = builder.ConnectionString };
 
         }
-
-
         /// <summary>
         /// Tries to establish the connection
         /// </summary>
@@ -43,72 +41,202 @@ namespace Project_Management_System
         public void CloseConnection()
         {
             co.Close();
+            co.Dispose();
         }
 
-        public List<Employee> GetAllEmployees()
-        {
-            OpenConnection();
-
-            const string queryString = "SELECT * FROM [employee]";
-            var command = new SqlCommand(queryString, co);
-            var reader = command.ExecuteReader();
-
-            var ret = new List<Employee>();
-            try
-            {
-                while (reader.Read())
-                {
-                    var current = new Employee((int) reader["memberId"],(string) reader["name"],(string) reader["title"],(int) reader["workingHours"],(int) reader["cost"]);
-                    ret.Add(current);
-                }
-
-            }
-            finally
-            {
-                reader.Close();
-                CloseConnection();
-            }
-
-
-            return ret;
-
-        }
 
         public void AddEmployee(Employee employee)
         {
-            throw new NotImplementedException();
-        }
+            OpenConnection();
 
-        public void RemoveEmployee(int v)
-        {
-            throw new NotImplementedException();
-        }
+            const string queryString = "INSERT INTO employee([taskId],[name],[title],[workingHours],[cost]) VALUES(@taskId,@name,@title,@workingHours,@cost)";
 
-        public List<Project> GetAllProjects()
-        {
-            throw new NotImplementedException();
+            var command = new SqlCommand(queryString, co);
+
+            command.Parameters.AddWithValue("@taskId", employee.TaskId);
+            command.Parameters.AddWithValue("@name", employee.Name);
+            command.Parameters.AddWithValue("@title", employee.Title);
+            command.Parameters.AddWithValue("@workingHours", employee.HoursDay);
+            command.Parameters.AddWithValue("@cost", employee.Cost);
+
+
+
+
+            var rowsAdded = command.ExecuteNonQuery();
+
+            if (rowsAdded < 1) throw new Exception("Error in inserting employee in database please try again later.");
+
+            CloseConnection();
         }
-        
         public void AddProject(Project project)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveProject(int v)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Project GetProjectByID(int v)
-        {
-            throw new NotImplementedException();
-        }
-
-        private List<Project> ProjectQueryExecute(string queryString)
         {
             OpenConnection();
 
+            const string queryString = "INSERT INTO project_Plan([weekStartDay],[workingHours],[projectName],[startDate],[dueDate]) VALUES(@weekStartDay,@workingHours,@projectName,@startDate,@dueDate)";
+
             var command = new SqlCommand(queryString, co);
+
+            command.Parameters.AddWithValue("@weekStartDay", project.StartingOfWeek);
+            command.Parameters.AddWithValue("@workingHours", project.NumberHrsPerDay);
+            command.Parameters.AddWithValue("@projectName", project.ProjectName);
+            command.Parameters.AddWithValue("@startDate", project.StartingDate);
+            command.Parameters.AddWithValue("@dueDate", project.DueDate);
+
+
+
+
+            var rowsAdded = command.ExecuteNonQuery();
+
+            if (rowsAdded < 1) throw new Exception("Error in inserting project in database please try again later.");
+
+            CloseConnection();
+        }
+        public void AddTask(Task task)
+        {
+            OpenConnection();
+
+            const string queryString = "INSERT INTO task([ParentTask],[taskType],[projectId],[startDate],[dueDate],[title],[actualWorkingHours],[isFinished]) VALUES(@ParentTask,@taskType,@projectId,@startDate,@dueDate,@title,@actualWorkingHours,@isFinished)";
+
+            var command = new SqlCommand(queryString, co);
+
+            command.Parameters.AddWithValue("@ParentTask", task.ParentTask);
+            command.Parameters.AddWithValue("@taskType", task.TaskType);
+            command.Parameters.AddWithValue("@projectId", task.ProjectID);
+            command.Parameters.AddWithValue("@startDate", task.StartingDate);
+            command.Parameters.AddWithValue("@dueDate", task.DueDate);
+            command.Parameters.AddWithValue("@title", task.Title);
+            command.Parameters.AddWithValue("@actualWorkingHours", task.ActualWorkingHours);
+            command.Parameters.AddWithValue("@isFinished", task.IsFinished);
+
+
+
+            var rowsAdded = command.ExecuteNonQuery();
+
+            if (rowsAdded < 1) throw new Exception("Error in inserting task in database please try again later.");
+
+            CloseConnection();
+        }
+
+        public void AddDeliverable(Deliverable deliverable)
+        {
+            OpenConnection();
+
+            const string queryString = "INSERT INTO deliverable([projectId],[isFinished],[title],[description]) VALUES(@projectId,@isFinished,@title,@description)";
+
+            var command = new SqlCommand(queryString, co);
+
+            command.Parameters.AddWithValue("@projectId", deliverable.ProjectID);
+            command.Parameters.AddWithValue("@title", deliverable.Title);
+            command.Parameters.AddWithValue("@description", deliverable.Description);
+            command.Parameters.AddWithValue("@isFinished", deliverable.IsFinished);
+
+
+
+            var rowsAdded = command.ExecuteNonQuery();
+
+            if (rowsAdded < 1) throw new Exception("Error in inserting deliverable in database please try again later.");
+
+            CloseConnection();
+        }
+
+
+        public void RemoveEmployee(int v)
+        {
+            RemoveEntry("employee", "memberId", v);
+        }
+        public void RemoveDeliverable(int v)
+        {
+            RemoveEntry("deliverable", "deliverableId", v);
+        }
+        public void RemoveProject(int v)
+        {
+            RemoveEntry("project_plan", "projectId", v);
+        }
+        public void RemoveTask(int v)
+        {
+            RemoveEntry("task", "taskId", v);
+        }
+
+        private void RemoveEntry(string tableName, string columnName, int id)
+        {
+            OpenConnection();
+
+            var queryString = $"DELETE FROM {tableName} WHERE {columnName} = @Id";
+
+            var command = new SqlCommand(queryString, co);
+
+            command.Parameters.AddWithValue("@Id", id);
+
+
+            var rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected < 1) throw new Exception($"Error in deleting {tableName} from database please try again later.");
+
+            CloseConnection();
+        }
+        public List<Employee> GetAllEmployees()
+        {
+            const string queryString = "SELECT * FROM [employee]";
+            var command = new SqlCommand(queryString);
+
+            return GetEmployeeQueryExecute(command);
+        }
+        public List<Project> GetAllProjects()
+        {
+            const string queryString = "SELECT * FROM [project_plan]";
+            var command = new SqlCommand(queryString);
+
+            return GetProjectQueryExecute(command);
+        }
+
+
+        public Project GetProjectByID(int v)
+        {
+            const string queryString = "SELECT * FROM [project_plan] WHERE [projectId] = @PID";
+            var command = new SqlCommand(queryString);
+
+            command.Parameters.AddWithValue("@PID", v);
+
+            var result = GetProjectQueryExecute(command);
+            return result.Capacity == 0 ? null : result[0];
+        }
+
+        public List<Task> GetAllMainTasks(int projectID)
+        {
+            const string queryString = "SELECT * FROM [tasks] WHERE [ParentTask] is NULL";
+            var command = new SqlCommand(queryString);
+            return GetTaskQueryExecute(command);
+
+        }
+
+        public List<Task> GetAllSubTasks(int taskID)
+        {
+            const string queryString = "SELECT * FROM [tasks] WHERE [ParentTask] is not NULL";
+            var command = new SqlCommand(queryString);
+            return GetTaskQueryExecute(command);
+        }
+
+        public List<Employee> GetAllFreeEmployees()
+        {
+            const string queryString = "SELECT * FROM [employee] WHERE [taskId] is NULL";
+            var command = new SqlCommand(queryString);
+            return GetEmployeeQueryExecute(command);
+        }
+
+        public List<Employee> GetEmployeesOnTask(int taskID)
+        {
+            const string queryString = "SELECT * FROM [employee] WHERE [taskId] = @taskID";
+
+            var command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@taskID", taskID);
+
+            return GetEmployeeQueryExecute(command);
+        }
+
+        private List<Project> GetProjectQueryExecute(SqlCommand command)
+        {
+            OpenConnection();
+            command.Connection = co;
             var reader = command.ExecuteReader();
 
             var ret = new List<Project>();
@@ -116,8 +244,7 @@ namespace Project_Management_System
             {
                 while (reader.Read())
                 {
-                    var current = new Project((int)reader["projectId"], (string)reader["projectName"], (DateTime)reader["startDate"], (DateTime)reader["dueDate"],(int) reader["workingHours"],(int) reader["weekStartDay"]);
-                    ret.Add(current);
+                    ret.Add(new Project((int)reader["projectId"], (string)reader["projectName"], (DateTime)reader["startDate"], (DateTime)reader["dueDate"], (int)reader["workingHours"], (int)reader["weekStartDay"]));
                 }
 
             }
@@ -131,24 +258,83 @@ namespace Project_Management_System
             return ret;
         }
 
-        public List<Employee> GetEmployeesOnTask(int taskID)
+        private List<Employee> GetEmployeeQueryExecute(SqlCommand command)
         {
-            throw new NotImplementedException();
+            OpenConnection();
+
+            command.Connection = co;
+            var reader = command.ExecuteReader();
+
+            var ret = new List<Employee>();
+            try
+            {
+                while (reader.Read())
+                {
+                    ret.Add(new Employee((int)reader["memberId"], (string)reader["name"], (string)reader["title"], (int)reader["workingHours"], (int)reader["cost"], (int)reader["taskId"]));
+                }
+
+            }
+            finally
+            {
+                reader.Close();
+                CloseConnection();
+            }
+
+
+            return ret;
+        }
+        private List<Deliverable> GetDeliverableQueryExecute(SqlCommand command)
+        {
+            OpenConnection();
+
+            command.Connection = co;
+            var reader = command.ExecuteReader();
+
+            var ret = new List<Deliverable>();
+            try
+            {
+                while (reader.Read())
+                {
+                    ret.Add(new Deliverable((int)reader["deliverableId"], (int)reader["projectId"], (bool)reader["isFinished"], (string)reader["title"], (string)reader["description"]));
+                }
+
+            }
+            finally
+            {
+                reader.Close();
+                CloseConnection();
+            }
+
+
+            return ret;
+        }
+        private List<Task> GetTaskQueryExecute(SqlCommand command)
+        {
+            OpenConnection();
+
+            command.Connection = co;
+            command.CommandText += " ORDER BY startDate";
+            var reader = command.ExecuteReader();
+
+            var ret = new List<Task>();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    ret.Add(new Task((int)reader["taskId"], (int)reader["ParentTask"], (int)reader["taskType"], (DateTime)reader["startDate"], (DateTime)reader["dueDate"], (string)reader["title"], (int)reader["actualWorkingHours"], (bool)reader["isFinished"]));
+                }
+
+            }
+            finally
+            {
+                reader.Close();
+                CloseConnection();
+            }
+
+
+            return ret;
         }
 
-        public List<Employee> GetAllFreeEmployees()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Task> GetAllMainTasks(int projectID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Task> GetAllSubTasks(int taskID)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
