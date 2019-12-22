@@ -22,7 +22,7 @@ namespace GanttChart
         // type = 0 -> no actual working hours else it will appear
         public FrmChart(int type)
         {
-            InitializeComponent(5);
+            InitializeComponent();
         }
 
         private void FrmChart_Load(object sender, EventArgs e)
@@ -240,18 +240,6 @@ namespace GanttChart
             Interaction.MsgBox("Picture saved", MsgBoxStyle.Information);
         }
 
-        private void InitializeComponent(int i)
-        {
-            this.SuspendLayout();
-            // 
-            // FrmChart
-            // 
-            this.ClientSize = new System.Drawing.Size(282, 253);
-            this.Name = "FrmChart";
-            this.Load += new System.EventHandler(this.FrmChart_Load_1);
-            this.ResumeLayout(false);
-
-        }
 
         private void FrmChart_Load_1(object sender, EventArgs e)
         {
