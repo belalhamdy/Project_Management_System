@@ -20,7 +20,8 @@ namespace GanttChart
         GanttChart ganttChart3;
 
         // type = 0 -> no actual working hours else it will appear
-        public FrmChart(int type)
+        // takes the project that you wish to show it's chart
+        public FrmChart(int projectId, int type)
         {
             InitializeComponent();
         }
