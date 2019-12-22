@@ -65,7 +65,7 @@
     <Compile Include="GUI\GanttChart\FrmChart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\GanttChart\Form1.Designer.cs" />
+    <Compile Include="GUI\GanttChart\FrmChart.Designer.cs" />
     <Compile Include="GUI\GanttChart\GanttChart.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,7 +90,7 @@
     <EmbeddedResource Include="GUI\frmDelieverable.resx">
       <DependentUpon>frmDelieverable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\GanttChart\Form1.resx" />
+    <EmbeddedResource Include="GUI\GanttChart\FrmChart.resx" />
     <EmbeddedResource Include="GUI\frmEmployee.resx">
       <DependentUpon>frmEmployee.cs</DependentUpon>
     </EmbeddedResource>

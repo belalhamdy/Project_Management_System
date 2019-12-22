@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace GanttChart
 {
-    public partial class Form1 : Form
+    public partial class FrmChart : Form
     {
 
         TextBox txtLog;
@@ -19,12 +19,13 @@ namespace GanttChart
         GanttChart ganttChart2;
         GanttChart ganttChart3;
 
-        public Form1()
+        // type = 0 -> no actual working hours else it will appear
+        public FrmChart(int type)
         {
             InitializeComponent(5);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FrmChart_Load(object sender, EventArgs e)
         {
             SaveImageToolStripMenuItem.Click += new EventHandler(SaveImageToolStripMenuItem_Click);
 
@@ -243,16 +244,16 @@ namespace GanttChart
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // FrmChart
             // 
             this.ClientSize = new System.Drawing.Size(282, 253);
-            this.Name = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load_1);
+            this.Name = "FrmChart";
+            this.Load += new System.EventHandler(this.FrmChart_Load_1);
             this.ResumeLayout(false);
 
         }
 
-        private void Form1_Load_1(object sender, EventArgs e)
+        private void FrmChart_Load_1(object sender, EventArgs e)
         {
 
         }
