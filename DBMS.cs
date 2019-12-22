@@ -197,7 +197,16 @@ namespace Project_Management_System
             var result = GetProjectQueryExecute(command);
             return result.Capacity == 0 ? null : result[0];
         }
+        public List<Task> GetAllTasks(int projectID)
+        {
+            const string queryString = "SELECT * FROM [task] WHERE [ProjectID] = @projectID";
 
+            var command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@projectID", projectID);
+
+            return GetTaskQueryExecute(command);
+
+        }
         public List<Task> GetAllMainTasks(int projectID)
         {
             const string queryString = "SELECT * FROM [task] WHERE [ParentTask] is NULL AND [ProjectID] = @projectID";
