@@ -266,7 +266,8 @@ namespace GanttChart
 
             if (lastLineStop > 0)
             {
-                objBmp = new Bitmap(Width - barStartRight, lastLineStop);
+                
+                objBmp = new Bitmap(Math.Max(Width - barStartRight,1), lastLineStop);
                 objGraphics = Graphics.FromImage(objBmp);
             }
 

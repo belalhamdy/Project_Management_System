@@ -31,6 +31,7 @@ namespace GanttChart
         public FrmChart(int projectId, bool showActualHours = true)
         {
             InitializeComponent();
+            this.MinimumSize = new Size(500, 100);
             this.projectId = projectId;
             this.showActualHours = showActualHours;
 
