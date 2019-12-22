@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Deliverable.cs" />
+    <Compile Include="GUI\frmPlanning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmPlanning.designer.cs">
+      <DependentUpon>frmPlanning.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaskTimeException.cs" />
     <Compile Include="GUI\frmChart.cs">
       <SubType>Form</SubType>
@@ -69,12 +75,6 @@
     <Compile Include="GUI\frmProject.Designer.cs">
       <DependentUpon>frmProject.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\frmTasks.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmTasks.designer.cs">
-      <DependentUpon>frmTasks.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,8 +85,8 @@
     <EmbeddedResource Include="GUI\frmEmployee.resx">
       <DependentUpon>frmEmployee.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\frmTasks.resx">
-      <DependentUpon>frmTasks.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\frmPlanning.resx">
+      <DependentUpon>frmPlanning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmProject.resx">
       <DependentUpon>frmProject.cs</DependentUpon>

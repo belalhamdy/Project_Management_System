@@ -9,7 +9,7 @@ namespace Project_Management_System
 {
     static class Program
     {
-        public static readonly DBMS dbms = new DBMS();
+        public static DBMS dbms;
         
         /// <summary>
         /// The main entry point for the application.
@@ -17,8 +17,7 @@ namespace Project_Management_System
         [STAThread]
         static void Main()
         {
-            Application.ApplicationExit += Application_Exit;
-
+            dbms = new DBMS();
             var t = dbms.GetAllEmployees();
             var tCapacity = t.Capacity;
             MessageBox.Show("developer note: database not integerated yet.");
@@ -29,9 +28,5 @@ namespace Project_Management_System
             Application.Run(new frmProject());
         }
 
-        private static void Application_Exit(object sender, EventArgs e)
-        {
-            dbms.CloseConnection();
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace Project_Management_System
     {
         private const string databaseName = "ProjectManager_DB";
 
-        private readonly SqlConnection co;
+        private SqlConnection co;
         private SqlConnectionStringBuilder builder;
 
         /// <summary>
@@ -24,27 +24,24 @@ namespace Project_Management_System
         {
             builder = new SqlConnectionStringBuilder { IntegratedSecurity = true, DataSource = "localhost" };
 
-
-            co = new SqlConnection { ConnectionString = builder.ConnectionString };
-
         }
         /// <summary>
         /// Tries to establish the connection
         /// </summary>
-        public void OpenConnection()
+        private void OpenConnection()
         {
+            co = new SqlConnection { ConnectionString = builder.ConnectionString };
             co.Open();
             co.ChangeDatabase(databaseName);
         }
         /// <summary>
         /// Closes the connection to the server and the database.
         /// </summary>
-        public void CloseConnection()
+        private void CloseConnection()
         {
             co.Close();
             co.Dispose();
         }
-
 
         public int AddEmployee(Employee employee)
         {
@@ -279,7 +276,8 @@ namespace Project_Management_System
             {
                 while (reader.Read())
                 {
-                    ret.Add(new Employee((int)reader["memberId"], (string)reader["name"], (string)reader["title"], (int)reader["workingHours"], (int)reader["cost"], (int)reader["taskId"]));
+
+                    ret.Add(new Employee((int)reader["memberId"], (string)reader["name"], (string)reader["title"], (int)reader["workingHours"], (int)reader["cost"], reader["taskId"] == System.DBNull.Value ? null : (int?)reader["taskId"]));
                 }
 
             }
@@ -331,7 +329,7 @@ namespace Project_Management_System
             {
                 while (reader.Read())
                 {
-                    ret.Add(new Task((int)reader["taskId"], (int)reader["ParentTask"], (int)reader["taskType"], (DateTime)reader["startDate"], (DateTime)reader["dueDate"], (string)reader["title"], (int)reader["actualWorkingHours"], (bool)reader["isFinished"]));
+                    ret.Add(new Task(reader["taskId"] == System.DBNull.Value ? null : (int?)reader["taskId"], (int)reader["ParentTask"], (int)reader["taskType"], (DateTime)reader["startDate"], (DateTime)reader["dueDate"], (string)reader["title"], reader["actualWorkingHours"] == System.DBNull.Value ? null : (int?)reader["actualWorkingHours"], (bool)reader["isFinished"]));
                 }
 
             }

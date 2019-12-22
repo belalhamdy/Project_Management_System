@@ -123,5 +123,10 @@ namespace Project_Management_System.GUI
                 lstProjects.Items.Add(lvi);
             }
         }
+
+        private void txtProjectName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
