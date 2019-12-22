@@ -111,6 +111,7 @@ namespace Project_Management_System.GUI
         private void ReloadProjectsList()
         {
             List<Project> retrieved = Program.dbms.GetAllProjects();
+            lstProjects.Items.Clear();
             foreach (var prj in retrieved)
             {
                 var lvi = new ListViewItem(prj.ID.ToString());

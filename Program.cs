@@ -18,10 +18,6 @@ namespace Project_Management_System
         static void Main()
         {
             dbms = new DBMS();
-            var t = dbms.GetAllEmployees();
-            var tCapacity = t.Capacity;
-            MessageBox.Show("developer note: database not integerated yet.");
-            //dbms.OpenConnection();
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

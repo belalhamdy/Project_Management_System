@@ -76,6 +76,7 @@ namespace Project_Management_System.GUI
         private void ReloadEmployeesList()
         {
             List<Employee> retrieved = Program.dbms.GetAllEmployees();
+            lstEmployees.Items.Clear();
             foreach (var emp in retrieved)
             {
                 var lvi = new ListViewItem(emp.ID.ToString());

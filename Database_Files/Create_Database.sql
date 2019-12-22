@@ -1,6 +1,7 @@
 CREATE DATABASE ProjectManager_DB
 GO
-
+USE ProjectManager_DB;
+GO
 CREATE TABLE [project_Plan] (
   [projectId] int PRIMARY KEY IDENTITY(1, 1),
   [weekStartDay] int NOT NULL,

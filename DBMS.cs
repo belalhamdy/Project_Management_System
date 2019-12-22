@@ -47,7 +47,7 @@ namespace Project_Management_System
         {
             OpenConnection();
 
-            const string queryString = "INSERT INTO employee([taskId],[name],[title],[workingHours],[cost]) VALUES(@taskId,@name,@title,@workingHours,@cost)";
+            const string queryString = "INSERT INTO employee([taskId],[name],[title],[workingHours],[cost]) output INSERTED.memberid VALUES(@taskId,@name,@title,@workingHours,@cost)";
 
             var command = new SqlCommand(queryString, co);
 
@@ -57,22 +57,19 @@ namespace Project_Management_System
             command.Parameters.AddWithValue("@workingHours", employee.HoursDay);
             command.Parameters.AddWithValue("@cost", employee.Cost);
 
+            int? newId = (int?)command.ExecuteScalar();
 
-
-
-            int? newId = (int)command.ExecuteScalar();
-
-            if (newId == null) throw new Exception("Error in inserting employee in database please try again later.");
+            if (newId == null) throw new Exception("Error in inserting project in database please try again later.");
 
             CloseConnection();
 
-            return (int) newId;
+            return (int)newId;
         }
         public int AddProject(Project project)
         {
             OpenConnection();
 
-            const string queryString = "INSERT INTO project_Plan([weekStartDay],[workingHours],[projectName],[startDate],[dueDate]) VALUES(@weekStartDay,@workingHours,@projectName,@startDate,@dueDate)";
+            const string queryString = "INSERT INTO project_Plan([weekStartDay],[workingHours],[projectName],[startDate],[dueDate])  output INSERTED.projectid VALUES(@weekStartDay,@workingHours,@projectName,@startDate,@dueDate)";
 
             var command = new SqlCommand(queryString, co);
 
@@ -81,11 +78,9 @@ namespace Project_Management_System
             command.Parameters.AddWithValue("@projectName", project.ProjectName);
             command.Parameters.AddWithValue("@startDate", project.StartingDate);
             command.Parameters.AddWithValue("@dueDate", project.DueDate);
+            
 
-
-
-
-            int? newId = (int)command.ExecuteScalar();
+            int? newId = (int?)command.ExecuteScalar();
 
             if (newId == null) throw new Exception("Error in inserting project in database please try again later.");
 
@@ -97,7 +92,7 @@ namespace Project_Management_System
         {
             OpenConnection();
 
-            const string queryString = "INSERT INTO task([ParentTask],[taskType],[projectId],[startDate],[dueDate],[title],[actualWorkingHours],[isFinished]) VALUES(@ParentTask,@taskType,@projectId,@startDate,@dueDate,@title,@actualWorkingHours,@isFinished)";
+            const string queryString = "INSERT INTO task([ParentTask],[taskType],[projectId],[startDate],[dueDate],[title],[actualWorkingHours],[isFinished])  output INSERTED.taskid VALUES(@ParentTask,@taskType,@projectId,@startDate,@dueDate,@title,@actualWorkingHours,@isFinished)";
 
             var command = new SqlCommand(queryString, co);
 
@@ -110,9 +105,7 @@ namespace Project_Management_System
             command.Parameters.AddWithValue("@actualWorkingHours", task.ActualWorkingHours ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@isFinished", task.IsFinished);
 
-
-
-            int? newId= (int) command.ExecuteScalar();
+            int? newId= (int?) command.ExecuteScalar();
 
             if (newId == null) throw new Exception("Error in inserting task in database please try again later.");
 
@@ -125,7 +118,7 @@ namespace Project_Management_System
         {
             OpenConnection();
 
-            const string queryString = "INSERT INTO deliverable([projectId],[isFinished],[title],[description]) VALUES(@projectId,@isFinished,@title,@description)";
+            const string queryString = "INSERT INTO deliverable([projectId],[isFinished],[title],[description])  output INSERTED.deliverableId VALUES(@projectId,@isFinished,@title,@description)";
 
             var command = new SqlCommand(queryString, co);
 
@@ -133,10 +126,8 @@ namespace Project_Management_System
             command.Parameters.AddWithValue("@title", deliverable.Title);
             command.Parameters.AddWithValue("@description", deliverable.Description ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@isFinished", deliverable.IsFinished);
-
-
-
-            int? newId = (int)command.ExecuteScalar();
+            
+            int? newId = (int?)command.ExecuteScalar();
 
             if (newId == null) throw new Exception("Error in inserting deliverable in database please try again later.");
 
@@ -209,7 +200,7 @@ namespace Project_Management_System
 
         public List<Task> GetAllMainTasks(int projectID)
         {
-            const string queryString = "SELECT * FROM [tasks] WHERE [ParentTask] is NULL";
+            const string queryString = "SELECT * FROM [task] WHERE [ParentTask] is NULL";
             var command = new SqlCommand(queryString);
             return GetTaskQueryExecute(command);
 
@@ -217,7 +208,7 @@ namespace Project_Management_System
 
         public List<Task> GetAllSubTasks(int taskID)
         {
-            const string queryString = "SELECT * FROM [tasks] WHERE [ParentTask] is not NULL";
+            const string queryString = "SELECT * FROM [task] WHERE [ParentTask] is not NULL";
             var command = new SqlCommand(queryString);
             return GetTaskQueryExecute(command);
         }
