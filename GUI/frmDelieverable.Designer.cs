@@ -30,6 +30,8 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnAddNew = new System.Windows.Forms.Button();
+            this.chkFinished = new System.Windows.Forms.CheckBox();
             this.btnDeleteSelected = new System.Windows.Forms.Button();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -41,7 +43,6 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chkFinished = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +60,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnAddNew);
             this.groupBox2.Controls.Add(this.chkFinished);
             this.groupBox2.Controls.Add(this.btnDeleteSelected);
             this.groupBox2.Controls.Add(this.txtDescription);
@@ -73,6 +75,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Delieverable Data";
             // 
+            // btnAddNew
+            // 
+            this.btnAddNew.Location = new System.Drawing.Point(275, -1);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNew.TabIndex = 9;
+            this.btnAddNew.Text = "Add New";
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            // 
+            // chkFinished
+            // 
+            this.chkFinished.AutoSize = true;
+            this.chkFinished.Location = new System.Drawing.Point(275, 30);
+            this.chkFinished.Name = "chkFinished";
+            this.chkFinished.Size = new System.Drawing.Size(76, 17);
+            this.chkFinished.TabIndex = 8;
+            this.chkFinished.Text = "Is Finishd?";
+            this.chkFinished.UseVisualStyleBackColor = true;
+            // 
             // btnDeleteSelected
             // 
             this.btnDeleteSelected.Enabled = false;
@@ -82,6 +104,7 @@
             this.btnDeleteSelected.TabIndex = 7;
             this.btnDeleteSelected.Text = "Delete Selected";
             this.btnDeleteSelected.UseVisualStyleBackColor = true;
+            this.btnDeleteSelected.Click += new System.EventHandler(this.btnDeleteSelected_Click);
             // 
             // txtDescription
             // 
@@ -123,6 +146,7 @@
             this.btnAddEdit.TabIndex = 0;
             this.btnAddEdit.Text = "Add";
             this.btnAddEdit.UseVisualStyleBackColor = true;
+            this.btnAddEdit.Click += new System.EventHandler(this.btnAddEdit_Click);
             // 
             // lstDelieverables
             // 
@@ -140,6 +164,7 @@
             this.lstDelieverables.TabIndex = 2;
             this.lstDelieverables.UseCompatibleStateImageBehavior = false;
             this.lstDelieverables.View = System.Windows.Forms.View.Details;
+            this.lstDelieverables.SelectedIndexChanged += new System.EventHandler(this.lstDelieverables_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -160,16 +185,6 @@
             // 
             this.columnHeader4.Text = "Is Finished";
             this.columnHeader4.Width = 77;
-            // 
-            // chkFinished
-            // 
-            this.chkFinished.AutoSize = true;
-            this.chkFinished.Location = new System.Drawing.Point(275, 30);
-            this.chkFinished.Name = "chkFinished";
-            this.chkFinished.Size = new System.Drawing.Size(76, 17);
-            this.chkFinished.TabIndex = 8;
-            this.chkFinished.Text = "Is Finishd?";
-            this.chkFinished.UseVisualStyleBackColor = true;
             // 
             // frmDelieverable
             // 
@@ -203,6 +218,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.CheckBox chkFinished;
+        private System.Windows.Forms.Button btnAddNew;
     }
 }
 

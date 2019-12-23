@@ -25,7 +25,6 @@ namespace Project_Management_System.Entities
         public string ProjectName { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime DueDate { get; set; }
-        public int Cost { get; set; }
         public int NumberHrsPerDay { get; set; }
         public int StartingOfWeek { get; set; }
 

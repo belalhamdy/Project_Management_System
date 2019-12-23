@@ -40,7 +40,6 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -54,6 +53,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnAddProject = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
+            this.btnChartFinish = new System.Windows.Forms.Button();
+            this.btnChartStart = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numWorkingHours)).BeginInit();
@@ -66,7 +67,6 @@
             this.txtProjectName.Name = "txtProjectName";
             this.txtProjectName.Size = new System.Drawing.Size(260, 20);
             this.txtProjectName.TabIndex = 1;
-            this.txtProjectName.TextChanged += new System.EventHandler(this.txtProjectName_TextChanged);
             // 
             // btnStartPlanning
             // 
@@ -144,7 +144,6 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5,
-            this.columnHeader6,
             this.columnHeader7});
             this.lstProjects.FullRowSelect = true;
             this.lstProjects.HideSelection = false;
@@ -181,11 +180,6 @@
             // 
             this.columnHeader5.Text = "Hours/Day";
             this.columnHeader5.Width = 76;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Cost";
-            this.columnHeader6.Width = 77;
             // 
             // columnHeader7
             // 
@@ -277,6 +271,7 @@
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(194, 20);
             this.dtpDueDate.TabIndex = 7;
+            this.dtpDueDate.ValueChanged += new System.EventHandler(this.dtpDueDate_ValueChanged);
             // 
             // dtpStartDate
             // 
@@ -285,6 +280,7 @@
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(194, 20);
             this.dtpStartDate.TabIndex = 5;
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.dtpStartDate_ValueChanged);
             // 
             // label4
             // 
@@ -335,11 +331,35 @@
             this.btnEmployees.UseVisualStyleBackColor = false;
             this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
             // 
+            // btnChartFinish
+            // 
+            this.btnChartFinish.Location = new System.Drawing.Point(320, 639);
+            this.btnChartFinish.Margin = new System.Windows.Forms.Padding(2);
+            this.btnChartFinish.Name = "btnChartFinish";
+            this.btnChartFinish.Size = new System.Drawing.Size(268, 24);
+            this.btnChartFinish.TabIndex = 4;
+            this.btnChartFinish.Text = "Show Gantt Shart After Finish";
+            this.btnChartFinish.UseVisualStyleBackColor = true;
+            this.btnChartFinish.Click += new System.EventHandler(this.btnChartFinish_Click);
+            // 
+            // btnChartStart
+            // 
+            this.btnChartStart.Location = new System.Drawing.Point(12, 639);
+            this.btnChartStart.Margin = new System.Windows.Forms.Padding(2);
+            this.btnChartStart.Name = "btnChartStart";
+            this.btnChartStart.Size = new System.Drawing.Size(268, 24);
+            this.btnChartStart.TabIndex = 5;
+            this.btnChartStart.Text = "Show Gantt Shart Before Start";
+            this.btnChartStart.UseVisualStyleBackColor = true;
+            this.btnChartStart.Click += new System.EventHandler(this.btnChartStart_Click);
+            // 
             // frmProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 638);
+            this.ClientSize = new System.Drawing.Size(593, 674);
+            this.Controls.Add(this.btnChartStart);
+            this.Controls.Add(this.btnChartFinish);
             this.Controls.Add(this.btnEmployees);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -347,6 +367,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmProject";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Project Management";
             this.Load += new System.EventHandler(this.frmProject_Load);
             this.groupBox2.ResumeLayout(false);
@@ -382,8 +403,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button btnEditDelieverables;
+        private System.Windows.Forms.Button btnChartFinish;
+        private System.Windows.Forms.Button btnChartStart;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace GanttChart
 {
-    partial class FrmChart
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -57,7 +57,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -72,9 +72,9 @@
             this.ClientSize = new System.Drawing.Size(1113, 615);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "FrmChart";
-            this.Text = "Project Gantt Chart";
-            this.Load += new System.EventHandler(this.FrmChart_Load);
+            this.Name = "Form1";
+            this.Text = "C# Gantt Chart";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ContextMenuGanttChart1.ResumeLayout(false);
             this.ResumeLayout(false);
 

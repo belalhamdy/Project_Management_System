@@ -245,6 +245,28 @@ namespace Project_Management_System
             return GetEmployeeQueryExecute(command);
         }
 
+        public List<Deliverable> GetProjectDeliverables(int id)
+        {
+            const string queryString = "SELECT * FROM [Deliverable] WHERE [projectId] = @id";
+
+            var command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@id", id);
+
+            return GetDeliverableQueryExecute(command);
+
+        }
+
+        public Deliverable GetDeliverableByID(int id)
+        {
+            const string queryString = "SELECT * FROM [Deliverable] WHERE [deliverableId] = @id";
+
+            var command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@id", id);
+
+            var result = GetDeliverableQueryExecute(command);
+            return result.Capacity == 0 ? null : result[0];
+        }
+
         private List<Project> GetProjectQueryExecute(SqlCommand command)
         {
             OpenConnection();
@@ -335,7 +357,7 @@ namespace Project_Management_System
             {
                 while (reader.Read())
                 {
-                    
+
                     var id = (int)reader["taskId"];
                     var parentTask = reader["ParentTask"] == System.DBNull.Value ? (int?)null : (int)reader["ParentTask"];
                     var taskType = (int)reader["taskType"];
@@ -359,6 +381,50 @@ namespace Project_Management_System
             return ret;
         }
 
+        public void UpdateDeliverable(Deliverable deliverable)
+        {
+            OpenConnection();
+
+            var queryString =
+                "UPDATE DELIVERABLE SET projectId = @PID , isFinished = @Finish , title = @title , description = @description WHERE deliverableId = @delivId";
+            var command = new SqlCommand(queryString, co);
+
+            command.Parameters.AddWithValue("@PID", deliverable.ProjectID);
+            command.Parameters.AddWithValue("@Finish", deliverable.IsFinished);
+            command.Parameters.AddWithValue("@title", deliverable.Title);
+            command.Parameters.AddWithValue("@description", deliverable.Description);
+            command.Parameters.AddWithValue("@delivId", deliverable.ID);
+            var rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected < 1) throw new Exception("Error in updating deliverable from database please try again later.");
+
+            CloseConnection();
+        }
+
+        public void UpdateTask(Task task)
+        {
+            OpenConnection();
+
+            var queryString =
+                "UPDATE TASK SET parentTask = @parent , taskType = @taskType ,projectId = @PID,startDate = @start, dueDate = @due, title = @title , actualWorkingHours = @actual , isFinished = @finish WHERE taskId = @taskId";
+            var command = new SqlCommand(queryString, co);
+
+            command.Parameters.AddWithValue("@parent", task.ParentTask ?? (object)DBNull.Value); // nullable
+            command.Parameters.AddWithValue("@taskType", task.TaskType);
+            command.Parameters.AddWithValue("@PID", task.ProjectID);
+            command.Parameters.AddWithValue("@start", task.StartingDate);
+            command.Parameters.AddWithValue("@due", task.DueDate);
+            command.Parameters.AddWithValue("@title", task.Title);
+            command.Parameters.AddWithValue("@actual", task.ActualWorkingHours ?? (object)DBNull.Value); // nullable
+            command.Parameters.AddWithValue("@finish", task.IsFinished);
+            command.Parameters.AddWithValue("@taskId", task.ID);
+
+            var rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected < 1) throw new Exception("Error in updating deliverable from database please try again later.");
+
+            CloseConnection();
+        }
         public void UnselectAllEmployeesFromTask(int taskID)
         {
             OpenConnection();

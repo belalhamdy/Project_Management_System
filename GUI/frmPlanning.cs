@@ -19,10 +19,10 @@ namespace Project_Management_System.GUI
             Add, Edit
         }
         private EntryMode currentMode;
-        private Project OwnerProject;
+        private Project ownerProject;
         public frmPlanning(Project project)
         {
-            this.OwnerProject = project;
+            this.ownerProject = project;
             InitializeComponent();
         }
 
@@ -35,6 +35,8 @@ namespace Project_Management_System.GUI
         private void SetEntryToAdd()
         {
             txtTitle.Clear();
+            chkIsFinished.Checked = false;
+            chkIsMilestone.Checked = false;
             dtpStartDate.Value = dtpDueDate.Value = DateTime.Now;
             numActualWorkingHours.Value = numWorkingHours.Minimum;
             btnAddEdit.Text = "Add New Task";
@@ -45,6 +47,8 @@ namespace Project_Management_System.GUI
         private void SetEntryToEdit(Task tag)
         {
             txtTitle.Text = tag.Title;
+            chkIsFinished.Checked = tag.IsFinished;
+            chkIsMilestone.Checked = tag.IsMilestone;
             dtpStartDate.Value = tag.StartingDate;
             dtpDueDate.Value = tag.DueDate;
             numActualWorkingHours.Value = tag.ActualWorkingHours ?? 0;
@@ -65,8 +69,8 @@ namespace Project_Management_System.GUI
 
         private void ReloadTasksList()
         {
-            List<Task> retrieved = Program.dbms.GetAllMainTasks(OwnerProject.ID);
-            var highNode = new TreeNode(OwnerProject.ProjectName);
+            List<Task> retrieved = Program.dbms.GetAllMainTasks(ownerProject.ID);
+            var highNode = new TreeNode(ownerProject.ProjectName);
             highNode.Tag = null;
             foreach (var tsk in retrieved)
             {
@@ -140,6 +144,7 @@ namespace Project_Management_System.GUI
 
         private void btnAddEdit_Click(object sender, EventArgs e)
         {
+            if (chkIsMilestone.Checked) dtpDueDate.Value = dtpStartDate.Value;
             if (trvTasks.SelectedNode == null)
             {
                 MessageBox.Show("Nothing is selected!", "Selection", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -153,13 +158,14 @@ namespace Project_Management_System.GUI
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (dtpStartDate.Value >= dtpDueDate.Value)
+            if (dtpStartDate.Value > dtpDueDate.Value)
             {
                 MessageBox.Show("Due Date of Project must be later than the start date", "Invalid Data",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (dtpStartDate.Value >= OwnerProject.DueDate || dtpDueDate.Value <= OwnerProject.StartingDate)
+
+            if (dtpStartDate.Value < ownerProject.StartingDate || dtpDueDate.Value > ownerProject.DueDate)
             {
                 MessageBox.Show("Task schedule does not fit in the project's schedule.", "Invalid Data",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -185,10 +191,10 @@ namespace Project_Management_System.GUI
             {
                 int? id = null;
                 if (parent.Tag != null) id = ((Task)parent.Tag).ID;
-                bool isFinished = false; //TODO: involve finished
-                int taskType = (int)Task.TypeOfTask.Task;
+                bool isFinished = chkIsFinished.Checked;
+                int taskType = (int)(chkIsMilestone.Checked ? Task.TypeOfTask.Milestone : Task.TypeOfTask.Task);
                 int? actualWork = numActualWorkingHours.Value == 0 ? null : (int?)numActualWorkingHours.Value;
-                Task addedTask = new Task(id, taskType, OwnerProject.ID, dtpStartDate.Value, dtpDueDate.Value, txtTitle.Text, actualWork, isFinished);
+                Task addedTask = new Task(id, taskType, ownerProject.ID, dtpStartDate.Value, dtpDueDate.Value, txtTitle.Text, actualWork, isFinished);
 
                 try
                 {
@@ -208,11 +214,21 @@ namespace Project_Management_System.GUI
             {
                 try
                 {
-                    int taskID = ((Task)trvTasks.SelectedNode.Tag).ID;
+                    Task cur = ((Task)trvTasks.SelectedNode.Tag);
+                    int taskID = cur.ID;
+                    cur.DueDate = dtpDueDate.Value;
+                    cur.StartingDate = dtpStartDate.Value;
+                    cur.Title = txtTitle.Text;
+                    cur.ActualWorkingHours = numActualWorkingHours.Value == 0 ? null : (int?)numActualWorkingHours.Value;
+                    cur.IsFinished = chkIsFinished.Checked;
+                    cur.TaskType = (chkIsMilestone.Checked ? Task.TypeOfTask.Milestone : Task.TypeOfTask.Task);
+
+                    Program.dbms.UpdateTask(cur);
                     Program.dbms.UnselectAllEmployeesFromTask(taskID);
                     List<int> lst = GetSelectedEmployees();
                     if (lst == null) return;
                     Program.dbms.SetEmployeesOnTask(taskID, lst);
+                    
                     ReloadTasksList();
                 }
                 catch(Exception ex)
@@ -231,7 +247,7 @@ namespace Project_Management_System.GUI
             foreach(ListViewItem lvi in lstSelectedEmployees.Items)
             {
                 lst.Add(int.Parse(lvi.Text));
-                if (int.Parse(lvi.SubItems[2].Text) < OwnerProject.NumberHrsPerDay)
+                if (int.Parse(lvi.SubItems[2].Text) < ownerProject.NumberHrsPerDay)
                 {
                     MessageBox.Show($"Employee {lvi.SubItems[1].Text}'s working hours per day are not suffient for this project.", "Working Hours", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return null;
@@ -282,7 +298,12 @@ namespace Project_Management_System.GUI
 
         private void dtp_ValueChanged(object sender, EventArgs e)
         {
-            numWorkingHours.Value = Math.Max(numWorkingHours.Minimum, (dtpDueDate.Value - dtpStartDate.Value).Days);
+            numWorkingHours.Value = Math.Max(numWorkingHours.Minimum, (dtpDueDate.Value - dtpStartDate.Value).Days * 8);
+        }
+
+        private void chkIsMilestone_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpDueDate.Enabled = !chkIsMilestone.Checked;
         }
     }
 }

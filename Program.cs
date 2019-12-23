@@ -23,7 +23,6 @@ namespace Project_Management_System
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmProject());
-            Application.Run(new FrmChart(1));
 
         }
 

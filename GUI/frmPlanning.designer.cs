@@ -57,6 +57,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddEdit = new System.Windows.Forms.Button();
+            this.chkIsMilestone = new System.Windows.Forms.CheckBox();
+            this.chkIsFinished = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.TaskGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numWorkingHours)).BeginInit();
@@ -85,6 +87,8 @@
             // 
             // TaskGroup
             // 
+            this.TaskGroup.Controls.Add(this.chkIsFinished);
+            this.TaskGroup.Controls.Add(this.chkIsMilestone);
             this.TaskGroup.Controls.Add(this.btnUnselect);
             this.TaskGroup.Controls.Add(this.btnRemove);
             this.TaskGroup.Controls.Add(this.numWorkingHours);
@@ -288,7 +292,7 @@
             // 
             this.txtTitle.Location = new System.Drawing.Point(39, 32);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(488, 20);
+            this.txtTitle.Size = new System.Drawing.Size(261, 20);
             this.txtTitle.TabIndex = 8;
             // 
             // label5
@@ -346,6 +350,27 @@
             this.btnAddEdit.UseVisualStyleBackColor = true;
             this.btnAddEdit.Click += new System.EventHandler(this.btnAddEdit_Click);
             // 
+            // chkIsMilestone
+            // 
+            this.chkIsMilestone.AutoSize = true;
+            this.chkIsMilestone.Location = new System.Drawing.Point(315, 34);
+            this.chkIsMilestone.Name = "chkIsMilestone";
+            this.chkIsMilestone.Size = new System.Drawing.Size(82, 17);
+            this.chkIsMilestone.TabIndex = 20;
+            this.chkIsMilestone.Text = "Is Milestone";
+            this.chkIsMilestone.UseVisualStyleBackColor = true;
+            this.chkIsMilestone.CheckedChanged += new System.EventHandler(this.chkIsMilestone_CheckedChanged);
+            // 
+            // chkIsFinished
+            // 
+            this.chkIsFinished.AutoSize = true;
+            this.chkIsFinished.Location = new System.Drawing.Point(445, 34);
+            this.chkIsFinished.Name = "chkIsFinished";
+            this.chkIsFinished.Size = new System.Drawing.Size(76, 17);
+            this.chkIsFinished.TabIndex = 21;
+            this.chkIsFinished.Text = "Is Finished";
+            this.chkIsFinished.UseVisualStyleBackColor = true;
+            // 
             // frmPlanning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,5 +424,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.CheckBox chkIsFinished;
+        private System.Windows.Forms.CheckBox chkIsMilestone;
     }
 }

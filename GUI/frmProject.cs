@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GanttChart;
 using Project_Management_System.Entities;
 
 namespace Project_Management_System.GUI
@@ -16,6 +17,12 @@ namespace Project_Management_System.GUI
         public frmProject()
         {
             InitializeComponent();
+
+            btnStartPlanning.Enabled = lstProjects.SelectedIndices.Count != 0;
+            btnDelete.Enabled = lstProjects.SelectedIndices.Count != 0;
+            btnEditDelieverables.Enabled = lstProjects.SelectedIndices.Count != 0;
+            btnChartFinish.Enabled = lstProjects.SelectedIndices.Count != 0;
+            btnChartStart.Enabled = lstProjects.SelectedIndices.Count != 0;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -35,6 +42,8 @@ namespace Project_Management_System.GUI
             btnStartPlanning.Enabled = lstProjects.SelectedIndices.Count != 0;
             btnDelete.Enabled = lstProjects.SelectedIndices.Count != 0;
             btnEditDelieverables.Enabled = lstProjects.SelectedIndices.Count != 0;
+            btnChartFinish.Enabled = lstProjects.SelectedIndices.Count != 0;
+            btnChartStart.Enabled = lstProjects.SelectedIndices.Count != 0;
         }
 
         private void btnAddProject_Click(object sender, EventArgs e)
@@ -104,7 +113,7 @@ namespace Project_Management_System.GUI
 
             Project ret = Program.dbms.GetProjectByID(int.Parse(lstProjects.SelectedItems[0].Text));
             frmPlanning frm = new frmPlanning(ret);
-            this.Hide();
+            //this.Hide();
             frm.ShowDialog();
             this.Show();
         }
@@ -120,15 +129,9 @@ namespace Project_Management_System.GUI
                 lvi.SubItems.Add(prj.StartingDate.ToShortDateString());
                 lvi.SubItems.Add(prj.DueDate.ToShortDateString());
                 lvi.SubItems.Add(prj.NumberHrsPerDay.ToString());
-                lvi.SubItems.Add(prj.Cost.ToString());
                 lvi.SubItems.Add(cmbStartDay.Items[prj.StartingOfWeek].ToString());
                 lstProjects.Items.Add(lvi);
             }
-        }
-
-        private void txtProjectName_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnEditDelieverables_Click(object sender, EventArgs e)
@@ -136,6 +139,27 @@ namespace Project_Management_System.GUI
             if (lstProjects.SelectedIndices.Count == 0) return;
             frmDelieverable frm = new frmDelieverable(int.Parse(lstProjects.SelectedItems[0].Text));
             frm.ShowDialog();
+        }
+
+        private void btnChartStart_Click(object sender, EventArgs e)
+        {
+            new FrmChart(int.Parse(lstProjects.SelectedItems[0].Text), false).ShowDialog();
+        }
+
+        private void btnChartFinish_Click(object sender, EventArgs e)
+        {
+            new FrmChart(int.Parse(lstProjects.SelectedItems[0].Text), true).ShowDialog();
+
+        }
+
+        private void dtpDueDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
